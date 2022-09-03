@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "stlsynapsedev"
+		},
+		"LS_ASA_ServerlessSQL_connectionString": {
+			"value": ""
+		},
+		"datalake_accountKey": {
+			"value": ""
+		},
+		"stlsynapsedev-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"LSRestRosterfy_properties_typeProperties_url": {
+			"value": "https://getconnected.rosterfy.com.au/api/v2"
+		},
+		"LS_ASA_KV_DataIntegration_properties_typeProperties_baseUrl": {
+			"value": "https://stlanalyticskeyvault.vault.azure.net/"
+		},
+		"LS_ASA_REST_Rosterfy_properties_typeProperties_url": {
+			"value": "https://getconnected.rosterfy.com.au/api/v2"
+		},
+		"LS_ASQL_CONTROL_properties_typeProperties_connectionString_secretName": {
+			"value": "ASQL-Control-ConnectionString"
+		},
+		"STLAnalytics_KeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://stlanalyticskeyvault.vault.azure.net/"
+		},
+		"datalake_properties_typeProperties_url": {
+			"value": "https://stldatalakedev.dfs.core.windows.net"
+		},
+		"stlsynapsedev-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://stlsynapsestorage.dfs.core.windows.net"
+		}
+	}
+}
