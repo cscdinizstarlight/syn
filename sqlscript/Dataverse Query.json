@@ -1,0 +1,20 @@
+{
+	"name": "Dataverse Query",
+	"properties": {
+		"folder": {
+			"name": "SQL Serverless"
+		},
+		"content": {
+			"query": "select top 10 * \nfrom dataverse_retrofitdev_unqafc25f60ecc7435a91ff9aabe7355.dbo.account a\nwhere CHARINDEX('@starlight.org.au', a.emailaddress1) > 0\n;\n\nselect top 20 * from RosterfyLakehouse.rfy.extRosterfyUser\nWHERE object_first_name = 'Evangeline'\n;\n\n--cross database queries - supported by serverless SQL pools\n--The queries can reference the serverless SQL databases or the Lake databases in the same workspace. Cross-workspace queries are not supported.\nselect top 50 \nb.*,\na.*\nfrom dataverse_retrofitdev_unqafc25f60ecc7435a91ff9aabe7355.dbo.account a\n       INNER JOIN RosterfyLakehouse.rfy.extRosterfyUser b ON a.emailaddress1 = b.email\n;\n\n\nselect top 100 AttributeName, AttributeType, AttributeTypeCode, Version, Timestamp, MetadataId, Precision, MaxLength  \nfrom openrowset(bulk 'https://stldatalakedev.dfs.core.windows.net/dataverse-retrofitdev-unqafc25f60ecc7435a91ff9aabe7355/Microsoft.Athena.TrickleFeedService/email-EntityMetadata.json', \n       FORMAT = 'csv',\n        fieldterminator ='0x0b',\n        fieldquote = '0x0b',\n        rowterminator = '0x0b'\n    ) with (doc nvarchar(max)) AS rows\n    cross apply openjson(doc, '$.AttributeMetadata')\n    with (\n            AttributeName nvarchar(100) '$.AttributeName',\n            AttributeType nvarchar(400) '$.AttributeType',\n            AttributeTypeCode int '$.AttributeTypeCode',\n            Version int '$.Version',\n            Timestamp nvarchar(50) '$.Timestamp',\n            MetadataId nvarchar(50) '$.Timestamp',\n            Precision int '$.Precision',\n            MaxLength int '$.MaxLength'\n    ) \n;\n\nwith CTE (AttributeName, AttributeType, AttributeTypeCode, Version, Timestamp, MetadataId, Precision, MaxLength )\nas \n(\nselect AttributeName, AttributeType, AttributeTypeCode, Version, Timestamp, MetadataId, Precision, MaxLength \nfrom openrowset(bulk 'https://stldatalakedev.dfs.core.windows.net/dataverse-retrofitdev-unqafc25f60ecc7435a91ff9aabe7355/Microsoft.Athena.TrickleFeedService/email-EntityMetadata.json', \n       FORMAT = 'csv',\n        fieldterminator ='0x0b',\n        fieldquote = '0x0b',\n        rowterminator = '0x0b'\n    ) with (doc nvarchar(max)) AS rows\n    cross apply openjson(doc, '$.AttributeMetadata')\n    with (\n            AttributeName nvarchar(100) '$.AttributeName',\n            AttributeType nvarchar(400) '$.AttributeType',\n            AttributeTypeCode int '$.AttributeTypeCode',\n            Version int '$.Version',\n            Timestamp nvarchar(50) '$.Timestamp',\n            MetadataId nvarchar(50) '$.Timestamp',\n            Precision int '$.Precision',\n            MaxLength int '$.MaxLength'\n    ) \n)\nselect * \nfrom cte\nwhere cte.AttributeName = 'sender'\n;\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

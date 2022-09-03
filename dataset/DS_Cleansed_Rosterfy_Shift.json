@@ -1,0 +1,497 @@
+{
+	"name": "DS_Cleansed_Rosterfy_Shift",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Rosterfy/Shift/Staging",
+				"fileSystem": "cleansed"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "event_id",
+				"type": "String"
+			},
+			{
+				"name": "object_event_shift_type_id",
+				"type": "String"
+			},
+			{
+				"name": "min_demand",
+				"type": "String"
+			},
+			{
+				"name": "max_demand",
+				"type": "String"
+			},
+			{
+				"name": "leader_demand",
+				"type": "String"
+			},
+			{
+				"name": "object_start_timestamp",
+				"type": "String"
+			},
+			{
+				"name": "object_end_timestamp",
+				"type": "String"
+			},
+			{
+				"name": "timezone",
+				"type": "String"
+			},
+			{
+				"name": "shift_confirmed_status_default",
+				"type": "String"
+			},
+			{
+				"name": "shift_rejected_status_default",
+				"type": "String"
+			},
+			{
+				"name": "shift_can_withdraw_default",
+				"type": "String"
+			},
+			{
+				"name": "shift_can_confirm_limit",
+				"type": "String"
+			},
+			{
+				"name": "shift_can_withdraw_limit",
+				"type": "String"
+			},
+			{
+				"name": "shift_checked_in_status_default",
+				"type": "String"
+			},
+			{
+				"name": "certificate_id",
+				"type": "String"
+			},
+			{
+				"name": "object_shift_application_form_id",
+				"type": "String"
+			},
+			{
+				"name": "object_shift_checkin_form_id",
+				"type": "String"
+			},
+			{
+				"name": "object_shift_attended_form_id",
+				"type": "String"
+			},
+			{
+				"name": "object_shift_checkout_form_id",
+				"type": "String"
+			},
+			{
+				"name": "object_shift_precheckin_form_id",
+				"type": "String"
+			},
+			{
+				"name": "training_ids",
+				"type": "String"
+			},
+			{
+				"name": "object_role_offer_id",
+				"type": "String"
+			},
+			{
+				"name": "object_role_offer_address",
+				"type": "String"
+			},
+			{
+				"name": "shift_enable_waitlist_default",
+				"type": "String"
+			},
+			{
+				"name": "max_waitlist",
+				"type": "String"
+			},
+			{
+				"name": "minimum_dob",
+				"type": "String"
+			},
+			{
+				"name": "object_minimum_age",
+				"type": "String"
+			},
+			{
+				"name": "object_self_checkin",
+				"type": "String"
+			},
+			{
+				"name": "self_checkin_open",
+				"type": "String"
+			},
+			{
+				"name": "self_checkin_close",
+				"type": "String"
+			},
+			{
+				"name": "self_checkout_close",
+				"type": "String"
+			},
+			{
+				"name": "shift_precheckin_open",
+				"type": "String"
+			},
+			{
+				"name": "object_post_feedback_form",
+				"type": "String"
+			},
+			{
+				"name": "object_is_virtual",
+				"type": "String"
+			},
+			{
+				"name": "geofence_checkin_limit",
+				"type": "String"
+			},
+			{
+				"name": "object_publish",
+				"type": "String"
+			},
+			{
+				"name": "public",
+				"type": "String"
+			},
+			{
+				"name": "sort_order",
+				"type": "String"
+			},
+			{
+				"name": "is_cancelled",
+				"type": "String"
+			},
+			{
+				"name": "deleted_at",
+				"type": "String"
+			},
+			{
+				"name": "created_at",
+				"type": "String"
+			},
+			{
+				"name": "updated_at",
+				"type": "String"
+			},
+			{
+				"name": "object_wish_sparkle_details",
+				"type": "String"
+			},
+			{
+				"name": "object_wish_sparkle_name",
+				"type": "String"
+			},
+			{
+				"name": "object_name",
+				"type": "String"
+			},
+			{
+				"name": "event_shift_description",
+				"type": "String"
+			},
+			{
+				"name": "iso",
+				"type": "String"
+			},
+			{
+				"name": "object_address_coordinates_latitude",
+				"type": "String"
+			},
+			{
+				"name": "object_address_coordinates_longitude",
+				"type": "String"
+			},
+			{
+				"name": "street_address_1",
+				"type": "String"
+			},
+			{
+				"name": "street_address_2",
+				"type": "String"
+			},
+			{
+				"name": "street_address_3",
+				"type": "String"
+			},
+			{
+				"name": "city",
+				"type": "String"
+			},
+			{
+				"name": "postcode",
+				"type": "String"
+			},
+			{
+				"name": "region",
+				"type": "String"
+			},
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "object_address_latitude",
+				"type": "String"
+			},
+			{
+				"name": "object_address_longitude",
+				"type": "String"
+			},
+			{
+				"name": "rrn",
+				"type": "String"
+			},
+			{
+				"name": "nice_end_timestamp",
+				"type": "String"
+			},
+			{
+				"name": "end_timestamp__date",
+				"type": "String"
+			},
+			{
+				"name": "end_timestamp__time",
+				"type": "String"
+			},
+			{
+				"name": "end_timestamp__offset",
+				"type": "String"
+			},
+			{
+				"name": "nice_event_shift_type_id",
+				"type": "String"
+			},
+			{
+				"name": "event_shift_type_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_is_virtual",
+				"type": "String"
+			},
+			{
+				"name": "nice_minimum_age",
+				"type": "String"
+			},
+			{
+				"name": "nice_name",
+				"type": "String"
+			},
+			{
+				"name": "nice_post_feedback_form",
+				"type": "String"
+			},
+			{
+				"name": "post_feedback_form:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_publish",
+				"type": "String"
+			},
+			{
+				"name": "nice_role_offer_address",
+				"type": "String"
+			},
+			{
+				"name": "nice_role_offer_id",
+				"type": "String"
+			},
+			{
+				"name": "role_offer_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_self_checkin",
+				"type": "String"
+			},
+			{
+				"name": "nice_shift_application_form_id",
+				"type": "String"
+			},
+			{
+				"name": "shift_application_form_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_shift_attended_form_id",
+				"type": "String"
+			},
+			{
+				"name": "shift_attended_form_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_shift_checkin_form_id",
+				"type": "String"
+			},
+			{
+				"name": "shift_checkin_form_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_shift_checkout_form_id",
+				"type": "String"
+			},
+			{
+				"name": "shift_checkout_form_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_shift_precheckin_form_id",
+				"type": "String"
+			},
+			{
+				"name": "shift_precheckin_form_id:value",
+				"type": "String"
+			},
+			{
+				"name": "nice_start_timestamp",
+				"type": "String"
+			},
+			{
+				"name": "start_timestamp__date",
+				"type": "String"
+			},
+			{
+				"name": "start_timestamp__time",
+				"type": "String"
+			},
+			{
+				"name": "start_timestamp__offset",
+				"type": "String"
+			},
+			{
+				"name": "visibility_hide_groups",
+				"type": "String"
+			},
+			{
+				"name": "visibility_show_groups",
+				"type": "String"
+			},
+			{
+				"name": "nice_wish_sparkle_details",
+				"type": "String"
+			},
+			{
+				"name": "nice_wish_sparkle_name",
+				"type": "String"
+			},
+			{
+				"name": "info",
+				"type": "String"
+			},
+			{
+				"name": "event_shift_link_id",
+				"type": "String"
+			},
+			{
+				"name": "account_id",
+				"type": "String"
+			},
+			{
+				"name": "account_url",
+				"type": "String"
+			},
+			{
+				"name": "shift_type_name",
+				"type": "String"
+			},
+			{
+				"name": "post_shift_feedback_form_completed_at",
+				"type": "String"
+			},
+			{
+				"name": "pre_checkin_form_completed_at",
+				"type": "String"
+			},
+			{
+				"name": "event_name",
+				"type": "String"
+			},
+			{
+				"name": "address",
+				"type": "String"
+			},
+			{
+				"name": "address_oneline",
+				"type": "String"
+			},
+			{
+				"name": "read",
+				"type": "String"
+			},
+			{
+				"name": "update",
+				"type": "String"
+			},
+			{
+				"name": "delete",
+				"type": "String"
+			},
+			{
+				"name": "apply",
+				"type": "String"
+			},
+			{
+				"name": "apply_error",
+				"type": "String"
+			},
+			{
+				"name": "apply_error_code",
+				"type": "String"
+			},
+			{
+				"name": "confirm",
+				"type": "String"
+			},
+			{
+				"name": "reject",
+				"type": "String"
+			},
+			{
+				"name": "selfCheckin",
+				"type": "String"
+			},
+			{
+				"name": "selfCheckout",
+				"type": "String"
+			},
+			{
+				"name": "submitAttendedForm",
+				"type": "String"
+			},
+			{
+				"name": "precheckin",
+				"type": "String"
+			},
+			{
+				"name": "applyWaitlist",
+				"type": "String"
+			},
+			{
+				"name": "cancel",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

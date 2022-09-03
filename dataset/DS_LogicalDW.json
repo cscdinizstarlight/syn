@@ -1,0 +1,13 @@
+{
+	"name": "DS_LogicalDW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ASA_ServerlessSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,718 @@
+{
+	"name": "DS_Raw_Rosterfy_User_Archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"object": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "integer"
+						},
+						"event_shift_id": {
+							"type": "integer"
+						},
+						"user_id": {
+							"type": "integer"
+						},
+						"post_shift_feedback_form_completed_at": {
+							"type": "null"
+						},
+						"precheckin_form_completed_at": {
+							"type": "null"
+						},
+						"event_shift_status_id": {
+							"type": "integer"
+						},
+						"is_leader": {
+							"type": "integer"
+						},
+						"break": {
+							"type": "string"
+						},
+						"start_timestamp": {
+							"type": "string"
+						},
+						"end_timestamp": {
+							"type": "string"
+						},
+						"cost": {
+							"type": "string"
+						},
+						"cost_meta": {
+							"type": "null"
+						},
+						"latitude": {
+							"type": "null"
+						},
+						"longitude": {
+							"type": "null"
+						},
+						"deleted_at": {
+							"type": "null"
+						},
+						"created_at": {
+							"type": "string"
+						},
+						"updated_at": {
+							"type": "string"
+						}
+					}
+				},
+				"nice": {
+					"type": "object",
+					"properties": {
+						"rrn": {
+							"type": "string"
+						},
+						"end_timestamp": {
+							"type": "string"
+						},
+						"end_timestamp__date": {
+							"type": "string"
+						},
+						"end_timestamp__time": {
+							"type": "string"
+						},
+						"end_timestamp__offset": {
+							"type": "string"
+						},
+						"event_shift_status_id": {
+							"type": "string"
+						},
+						"event_shift_status_id:value": {
+							"type": "integer"
+						},
+						"is_leader": {
+							"type": "string"
+						},
+						"start_timestamp": {
+							"type": "string"
+						},
+						"start_timestamp__date": {
+							"type": "string"
+						},
+						"start_timestamp__time": {
+							"type": "string"
+						},
+						"start_timestamp__offset": {
+							"type": "string"
+						},
+						"attended": {
+							"type": "object",
+							"properties": {
+								"seconds": {
+									"type": "integer"
+								},
+								"minutes": {
+									"type": "integer"
+								},
+								"hours": {
+									"type": "number"
+								},
+								"pretty": {
+									"type": "null"
+								}
+							}
+						},
+						"event_id": {
+							"type": "integer"
+						},
+						"event_name": {
+							"type": "string"
+						},
+						"is_event_leader": {
+							"type": "boolean"
+						},
+						"checkin_location": {
+							"type": "null"
+						},
+						"shift_name": {
+							"type": "string"
+						},
+						"user_name": {
+							"type": "string"
+						},
+						"requires_pre_checkin": {
+							"type": "boolean"
+						},
+						"has_shift_attended_form": {
+							"type": "boolean"
+						},
+						"has_checkin_form": {
+							"type": "boolean"
+						},
+						"has_checkout_form": {
+							"type": "boolean"
+						},
+						"shift_checkin_visible_attributes": {
+							"type": "array"
+						}
+					}
+				},
+				"relations": {
+					"type": "object",
+					"properties": {
+						"user": {
+							"type": "object",
+							"properties": {
+								"object": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "integer"
+										},
+										"id_token": {
+											"type": "string"
+										},
+										"email": {
+											"type": "string"
+										},
+										"first_name": {
+											"type": "string"
+										},
+										"middle_name": {
+											"type": "string"
+										},
+										"last_name": {
+											"type": "string"
+										},
+										"preferred_name": {
+											"type": "string"
+										},
+										"phone": {
+											"type": "string"
+										},
+										"dob": {
+											"type": "string"
+										},
+										"picture": {
+											"type": "string"
+										},
+										"picture_status": {
+											"type": "integer"
+										},
+										"is_subscribed": {
+											"type": "integer"
+										},
+										"is_unreachable": {
+											"type": "integer"
+										},
+										"terms": {
+											"type": "integer"
+										},
+										"rating": {
+											"type": "string"
+										},
+										"shift_privacy": {
+											"type": "integer"
+										},
+										"is_team_leader": {
+											"type": "integer"
+										},
+										"email_verified": {
+											"type": "integer"
+										},
+										"verify_email_token": {
+											"type": "null"
+										},
+										"login_lockout_attempts": {
+											"type": "integer"
+										},
+										"login_lockout_at": {
+											"type": "null"
+										},
+										"login_lockout_email_sent_at": {
+											"type": "null"
+										},
+										"last_login_at": {
+											"type": "string"
+										},
+										"delete_requested_at": {
+											"type": "null"
+										},
+										"deleted_at": {
+											"type": "null"
+										},
+										"created_at": {
+											"type": "string"
+										},
+										"updated_at": {
+											"type": "string"
+										},
+										"team_member_id": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"employment_status": {
+											"type": "string"
+										},
+										"address": {
+											"type": "object",
+											"properties": {
+												"iso": {
+													"type": "null"
+												},
+												"coordinates": {
+													"type": "object",
+													"properties": {
+														"latitude": {
+															"type": "null"
+														},
+														"longitude": {
+															"type": "null"
+														}
+													}
+												},
+												"street_address_1": {
+													"type": "null"
+												},
+												"street_address_2": {
+													"type": "null"
+												},
+												"street_address_3": {
+													"type": "null"
+												},
+												"city": {
+													"type": "null"
+												},
+												"postcode": {
+													"type": "null"
+												},
+												"region": {
+													"type": "null"
+												},
+												"country": {
+													"type": "null"
+												},
+												"latitude": {
+													"type": "null"
+												},
+												"longitude": {
+													"type": "null"
+												}
+											}
+										}
+									}
+								},
+								"nice": {
+									"type": "object",
+									"properties": {
+										"rrn": {
+											"type": "string"
+										},
+										"email_verified": {
+											"type": "string"
+										},
+										"first_name": {
+											"type": "string"
+										},
+										"is_subscribed": {
+											"type": "string"
+										},
+										"is_team_leader": {
+											"type": "string"
+										},
+										"last_name": {
+											"type": "string"
+										},
+										"middle_name": {
+											"type": "string"
+										},
+										"phone": {
+											"type": "string"
+										},
+										"phone:raw": {
+											"type": "string"
+										},
+										"preferred_name": {
+											"type": "string"
+										},
+										"shift_privacy": {
+											"type": "string"
+										},
+										"terms": {
+											"type": "string"
+										},
+										"employment_status": {
+											"type": "string"
+										},
+										"state": {
+											"type": "string"
+										},
+										"team_member_id": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"age": {
+											"type": "integer"
+										},
+										"address": {
+											"type": "string"
+										},
+										"address_oneline": {
+											"type": "string"
+										},
+										"info": {
+											"type": "string"
+										},
+										"background_check_user": {
+											"type": "array"
+										},
+										"preferred_first_name": {
+											"type": "string"
+										},
+										"available_by_default": {
+											"type": "boolean"
+										},
+										"google2fa_enabled": {
+											"type": "boolean"
+										},
+										"picture_status": {
+											"type": "string"
+										},
+										"delete_requested": {
+											"type": "boolean"
+										},
+										"updated_hours": {
+											"type": "integer"
+										},
+										"login_locked": {
+											"type": "boolean"
+										},
+										"duplicate_status": {
+											"type": "string"
+										}
+									}
+								},
+								"relations": {
+									"type": "object",
+									"properties": {
+										"user_checkpoint": {
+											"type": "object",
+											"properties": {
+												"object": {
+													"type": "object",
+													"properties": {
+														"id": {
+															"type": "integer"
+														},
+														"user_checkpoint_type_id": {
+															"type": "null"
+														},
+														"name": {
+															"type": "string"
+														},
+														"label": {
+															"type": "null"
+														},
+														"permissions": {
+															"type": "object",
+															"properties": {
+																"all": {
+																	"type": "string"
+																}
+															}
+														},
+														"actions": {
+															"type": "null"
+														},
+														"sort_order": {
+															"type": "integer"
+														},
+														"deleted_at": {
+															"type": "null"
+														},
+														"created_at": {
+															"type": "string"
+														},
+														"updated_at": {
+															"type": "string"
+														}
+													}
+												},
+												"nice": {
+													"type": "object",
+													"properties": {
+														"count": {
+															"type": "integer"
+														},
+														"content_id": {
+															"type": "null"
+														}
+													}
+												},
+												"permissions": {
+													"type": "object",
+													"properties": {
+														"read": {
+															"type": "boolean"
+														},
+														"update": {
+															"type": "boolean"
+														},
+														"delete": {
+															"type": "boolean"
+														}
+													}
+												}
+											}
+										},
+										"user_type": {
+											"type": "object",
+											"properties": {
+												"object": {
+													"type": "object",
+													"properties": {
+														"id": {
+															"type": "integer"
+														},
+														"account_branding_id": {
+															"type": "null"
+														},
+														"name": {
+															"type": "string"
+														},
+														"code": {
+															"type": "string"
+														},
+														"profile_form_id": {
+															"type": "null"
+														},
+														"registration_form_id": {
+															"type": "null"
+														},
+														"shift_limit": {
+															"type": "integer"
+														},
+														"shift_max_time": {
+															"type": "null"
+														},
+														"max_shift_length": {
+															"type": "integer"
+														},
+														"min_shift_length": {
+															"type": "integer"
+														},
+														"gap_between_shifts": {
+															"type": "integer"
+														},
+														"deleted_at": {
+															"type": "null"
+														},
+														"created_at": {
+															"type": "string"
+														},
+														"updated_at": {
+															"type": "string"
+														}
+													}
+												},
+												"nice": {
+													"type": "array"
+												},
+												"permissions": {
+													"type": "object",
+													"properties": {
+														"read": {
+															"type": "boolean"
+														},
+														"update": {
+															"type": "boolean"
+														},
+														"delete": {
+															"type": "boolean"
+														}
+													}
+												}
+											}
+										},
+										"background_check_user": {
+											"type": "array"
+										},
+										"vendor_id": {
+											"type": "array"
+										}
+									}
+								},
+								"permissions": {
+									"type": "object",
+									"properties": {
+										"read": {
+											"type": "boolean"
+										},
+										"update": {
+											"type": "boolean"
+										},
+										"delete": {
+											"type": "boolean"
+										},
+										"impersonate": {
+											"type": "boolean"
+										}
+									}
+								},
+								"attributes": {
+									"type": "object",
+									"properties": {
+										"employment_status": {
+											"type": "object",
+											"properties": {
+												"name": {
+													"type": "string"
+												},
+												"label": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												}
+											}
+										},
+										"state": {
+											"type": "object",
+											"properties": {
+												"name": {
+													"type": "string"
+												},
+												"label": {
+													"type": "string"
+												},
+												"type": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"status": {
+							"type": "object",
+							"properties": {
+								"object": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "integer"
+										},
+										"name": {
+											"type": "string"
+										},
+										"frontend_name": {
+											"type": "string"
+										},
+										"type": {
+											"type": "string"
+										},
+										"options": {
+											"type": "object",
+											"properties": {
+												"color": {
+													"type": "string"
+												}
+											}
+										},
+										"is_system": {
+											"type": "integer"
+										},
+										"sort_order": {
+											"type": "integer"
+										},
+										"deleted_at": {
+											"type": "null"
+										},
+										"created_at": {
+											"type": "string"
+										},
+										"updated_at": {
+											"type": "string"
+										}
+									}
+								},
+								"nice": {
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string"
+										},
+										"color_lightness": {
+											"type": "integer"
+										}
+									}
+								},
+								"relations": {
+									"type": "array"
+								},
+								"permissions": {
+									"type": "object",
+									"properties": {
+										"read": {
+											"type": "boolean"
+										},
+										"update": {
+											"type": "boolean"
+										},
+										"delete": {
+											"type": "boolean"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"permissions": {
+					"type": "object",
+					"properties": {
+						"read": {
+							"type": "boolean"
+						},
+						"update": {
+							"type": "boolean"
+						},
+						"delete": {
+							"type": "boolean"
+						},
+						"precheckin": {
+							"type": "boolean"
+						},
+						"checkin": {
+							"type": "boolean"
+						}
+					}
+				},
+				"attributes": {
+					"type": "array"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

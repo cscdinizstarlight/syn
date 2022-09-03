@@ -1,0 +1,503 @@
+{
+	"name": "PL_Curated_Rosterfy_BookedShift",
+	"properties": {
+		"activities": [
+			{
+				"name": "RosterfyBookedShiftCleansedToCurated",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "Rosterfy/BookedShift/Staging",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "object_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_shift_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_shift_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "user_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "user_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "post_shift_feedback_form_completed_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "post_shift_feedback_form_completed_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "precheckin_form_completed_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "precheckin_form_completed_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_event_shift_status_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_event_shift_status_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_start_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_start_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_end_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_end_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_deleted_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_deleted_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_created_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_created_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_updated_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_updated_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_end_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_end_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_event_shift_status_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_event_shift_status_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_is_leader",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_is_leader",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_start_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_start_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "attended_seconds",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attended_seconds",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "attended_minutes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attended_minutes",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "attended_hours",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attended_hours",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "attended_pretty",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attended_pretty",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "is_event_leader",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "is_event_leader",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_start_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_start_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_end_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_end_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_timezone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_timezone",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "requires_pre_checkin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "requires_pre_checkin",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "has_shift_attended_form",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "has_shift_attended_form",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "has_checkin_form",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "has_checkin_form",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "has_checkout_form",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "has_checkout_form",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Cleansed_Rosterfy_BookedShift",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Curated_Rosterfy_BookedShift",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-21T22:42:21Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

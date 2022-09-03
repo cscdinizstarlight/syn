@@ -1,0 +1,11 @@
+{
+	"name": "LS_ASA_KV_DataIntegration",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://stlanalyticskeyvault.vault.azure.net/"
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"name": "DS_Source_Rosterfy_User",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSRestRosterfy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "user"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

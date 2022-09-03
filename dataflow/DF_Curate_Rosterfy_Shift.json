@@ -1,0 +1,32 @@
+{
+	"name": "DF_Curate_Rosterfy_Shift",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_Cleansed_Rosterfy_Shift",
+						"type": "DatasetReference"
+					},
+					"name": "RosterfyShift"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curated_Rosterfy_Shift",
+						"type": "DatasetReference"
+					},
+					"name": "SinkRosterfyShift"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddDayOfShift"
+				}
+			],
+			"script": "source(output(\n\t\tid as string,\n\t\tevent_id as string,\n\t\tobject_event_shift_type_id as string,\n\t\tmin_demand as string,\n\t\tmax_demand as string,\n\t\tleader_demand as string,\n\t\tobject_start_timestamp as string,\n\t\tobject_end_timestamp as string,\n\t\ttimezone as string,\n\t\tshift_confirmed_status_default as string,\n\t\tshift_rejected_status_default as string,\n\t\tshift_can_withdraw_default as string,\n\t\tshift_can_confirm_limit as string,\n\t\tshift_can_withdraw_limit as string,\n\t\tshift_checked_in_status_default as string,\n\t\tcertificate_id as string,\n\t\tobject_shift_application_form_id as string,\n\t\tobject_shift_checkin_form_id as string,\n\t\tobject_shift_attended_form_id as string,\n\t\tobject_shift_checkout_form_id as string,\n\t\tobject_shift_precheckin_form_id as string,\n\t\ttraining_ids as string,\n\t\tobject_role_offer_id as string,\n\t\tobject_role_offer_address as string,\n\t\tshift_enable_waitlist_default as string,\n\t\tmax_waitlist as string,\n\t\tminimum_dob as string,\n\t\tobject_minimum_age as string,\n\t\tobject_self_checkin as string,\n\t\tself_checkin_open as string,\n\t\tself_checkin_close as string,\n\t\tself_checkout_close as string,\n\t\tshift_precheckin_open as string,\n\t\tobject_post_feedback_form as string,\n\t\tobject_is_virtual as string,\n\t\tgeofence_checkin_limit as string,\n\t\tobject_publish as string,\n\t\tpublic as string,\n\t\tsort_order as string,\n\t\tis_cancelled as string,\n\t\tdeleted_at as string,\n\t\tcreated_at as string,\n\t\tupdated_at as string,\n\t\tobject_wish_sparkle_details as string,\n\t\tobject_wish_sparkle_name as string,\n\t\tobject_name as string,\n\t\tevent_shift_description as string,\n\t\tiso as string,\n\t\tobject_address_coordinates_latitude as string,\n\t\tobject_address_coordinates_longitude as string,\n\t\tstreet_address_1 as string,\n\t\tstreet_address_2 as string,\n\t\tstreet_address_3 as string,\n\t\tcity as string,\n\t\tpostcode as string,\n\t\tregion as string,\n\t\tcountry as string,\n\t\tobject_address_latitude as string,\n\t\tobject_address_longitude as string,\n\t\trrn as string,\n\t\tnice_end_timestamp as string,\n\t\tend_timestamp__date as string,\n\t\tend_timestamp__time as string,\n\t\tend_timestamp__offset as string,\n\t\tnice_event_shift_type_id as string,\n\t\t{event_shift_type_id:value} as string,\n\t\tnice_is_virtual as string,\n\t\tnice_minimum_age as string,\n\t\tnice_name as string,\n\t\tnice_post_feedback_form as string,\n\t\t{post_feedback_form:value} as string,\n\t\tnice_publish as string,\n\t\tnice_role_offer_address as string,\n\t\tnice_role_offer_id as string,\n\t\t{role_offer_id:value} as string,\n\t\tnice_self_checkin as string,\n\t\tnice_shift_application_form_id as string,\n\t\t{shift_application_form_id:value} as string,\n\t\tnice_shift_attended_form_id as string,\n\t\t{shift_attended_form_id:value} as string,\n\t\tnice_shift_checkin_form_id as string,\n\t\t{shift_checkin_form_id:value} as string,\n\t\tnice_shift_checkout_form_id as string,\n\t\t{shift_checkout_form_id:value} as string,\n\t\tnice_shift_precheckin_form_id as string,\n\t\t{shift_precheckin_form_id:value} as string,\n\t\tnice_start_timestamp as string,\n\t\tstart_timestamp__date as string,\n\t\tstart_timestamp__time as string,\n\t\tstart_timestamp__offset as string,\n\t\tvisibility_hide_groups as string,\n\t\tvisibility_show_groups as string,\n\t\tnice_wish_sparkle_details as string,\n\t\tnice_wish_sparkle_name as string,\n\t\tinfo as string,\n\t\tevent_shift_link_id as string,\n\t\taccount_id as string,\n\t\taccount_url as string,\n\t\tshift_type_name as string,\n\t\tpost_shift_feedback_form_completed_at as string,\n\t\tpre_checkin_form_completed_at as string,\n\t\tevent_name as string,\n\t\taddress as string,\n\t\taddress_oneline as string,\n\t\tread as string,\n\t\tupdate as string,\n\t\tdelete as string,\n\t\tapply as string,\n\t\tapply_error as string,\n\t\tapply_error_code as string,\n\t\tconfirm as string,\n\t\treject as string,\n\t\tselfCheckin as string,\n\t\tselfCheckout as string,\n\t\tsubmitAttendedForm as string,\n\t\tprecheckin as string,\n\t\tapplyWaitlist as string,\n\t\tcancel as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false,\n\tmultiLineRow: true) ~> RosterfyShift\nRosterfyShift derive(day_of_shift = toDate(object_start_timestamp)) ~> AddDayOfShift\nAddDayOfShift sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tmapColumn(\n\t\tid,\n\t\tevent_id,\n\t\tobject_name,\n\t\tday_of_shift,\n\t\tnice_wish_sparkle_name,\n\t\tnice_wish_sparkle_details\n\t)) ~> SinkRosterfyShift"
+		}
+	}
+}

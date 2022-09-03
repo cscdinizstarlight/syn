@@ -1,0 +1,62 @@
+{
+	"name": "PL_Raw_Rosterfy_Archive_Binary",
+	"properties": {
+		"description": "Use Binary files for Source and Sink datasets - binary files support \"Delete files after completion\" option",
+		"activities": [
+			{
+				"name": "ArchiveRawRosterfyUser",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"deleteFilesAfterCompletion": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_User_Binary",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_Archive",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@concat('Rosterfy/User/', formatDateTime(utcnow(), 'yyyy'), '/', formatDateTime(utcnow(), 'MM'), '/', formatDateTime(utcnow(), 'dd'), '/') ",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-15T06:41:29Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

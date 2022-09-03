@@ -1,0 +1,1667 @@
+{
+	"name": "PL_Curated_Rosterfy_Event",
+	"properties": {
+		"activities": [
+			{
+				"name": "RosterfyEventCleansedToCurated",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "Rosterfy/Event/Staging",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "parent_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "parent_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_event_template_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_event_template_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "path",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "path",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_event_type_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_event_type_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "timezone",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "timezone",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_start_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_start_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_end_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_end_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_apps_open_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_apps_open_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_apps_close_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_apps_close_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_status_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_status_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "max_shift_apps_per_user",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "max_shift_apps_per_user",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "min_shift_apps_per_user",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "min_shift_apps_per_user",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "min_shift_apps_per_shift_type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "min_shift_apps_per_shift_type",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "gap_between_shifts",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "gap_between_shifts",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_confirmed_status_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_confirmed_status_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_rejected_status_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_rejected_status_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_can_withdraw_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_can_confirm_limit",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_can_confirm_limit",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_can_withdraw_limit",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_limit",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_checked_in_status_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_checked_in_status_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "certificate_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "certificate_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_application_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_application_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_checkin_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_checkin_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_attended_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_attended_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_checkout_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_checkout_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_feedback_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_feedback_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_shift_precheckin_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_shift_precheckin_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "training_ids",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "training_ids",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "banner_image",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "banner_image",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "grid_image",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grid_image",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "minimum_dob",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "minimum_dob",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "minimum_age",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "minimum_age",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_role_offer_address",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_role_offer_address",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "checkin_visible_attributes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "checkin_visible_attributes",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_filter_attributes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_filter_attributes",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_self_checkin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_self_checkin",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "self_checkin_open",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "self_checkin_open",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "self_checkin_close",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "self_checkin_close",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "self_checkout_close",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "self_checkout_close",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_precheckin_open_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_precheckin_open_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_enable_waitlist_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_enable_waitlist_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "geofence_checkin_limit_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "geofence_checkin_limit_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "max_waitlist",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "max_waitlist",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "post_feedback_form",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "post_feedback_form",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "post_feedback_publish_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "post_feedback_publish_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "expression_of_interest_form",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "expression_of_interest_form",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_is_virtual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_is_virtual",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_publish",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_publish",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_promoted",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_promoted",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "public",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "public",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "public_shift",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "public_shift",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "public_shift_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "public_shift_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "token",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "token",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "deleted_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "deleted_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "created_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "updated_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "description",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "post_feedback",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "post_feedback",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "iso",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "iso",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_address_coordinates_latitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_address_coordinates_latitude",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_address_coordinates_longitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_address_coordinates_longitude",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "street_address_1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "street_address_1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "street_address_2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "street_address_2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "street_address_3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "street_address_3",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "city",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "postcode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "postcode",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "region",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "country",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_address_latitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_address_latitude",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_address_longitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_address_longitude",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_visibility_show_groups'][",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_visibility_show_groups'][",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_visibility_hide_groups'][",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_visibility_hide_groups'][",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "object_visibility_show_roleoffer'][",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "object_visibility_show_roleoffer'][",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "rrn",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "rrn",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_apps_close_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_apps_close_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_close_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_close_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_close_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_apps_open_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_apps_open_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_open_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_open_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apps_open_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_end_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_end_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "end_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "end_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_event_template_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_event_template_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_template_id:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_template_id:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_event_type_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_event_type_id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_type_id:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_type_id:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_is_virtual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_is_virtual",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_promoted",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_promoted",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_publish",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_publish",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_role_offer_address",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_role_offer_address",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_self_checkin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_self_checkin",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_application_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_application_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_application_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_application_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_attended_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_attended_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_attended_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_attended_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_checkin_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_checkin_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_checkin_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_checkin_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_checkout_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_checkout_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_checkout_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_checkout_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_feedback_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_feedback_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_feedback_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_feedback_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_shift_precheckin_form_id_default",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_shift_precheckin_form_id_default",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "shift_precheckin_form_id_default:value",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "shift_precheckin_form_id_default:value",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "nice_start_timestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nice_start_timestamp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__time",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__time",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "start_timestamp__offset",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "start_timestamp__offset",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "visibility_hide_groups",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visibility_hide_groups",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "visibility_show_groups",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "visibility_show_groups",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "full_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "full_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "event_type_name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "event_type_name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "grid_list_image",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grid_list_image",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "min_shifts",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "min_shifts",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "applied_shift_count",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "applied_shift_count",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "post_event_feedback_form_completed_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "post_event_feedback_form_completed_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "expression_of_interest_form_completed_at",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "expression_of_interest_form_completed_at",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "address",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "address",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "address_oneline",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "address_oneline",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "code",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "code",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "message",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "message",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "relations'][",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "relations'][",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "read",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "read",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "update",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "update",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "delete",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "delete",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "apply",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "apply",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "attributes'][",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "attributes'][",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Cleansed_Rosterfy_Event",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Curated_Rosterfy_Event",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-21T22:51:42Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

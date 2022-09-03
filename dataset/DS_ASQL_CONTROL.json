@@ -1,0 +1,13 @@
+{
+	"name": "DS_ASQL_CONTROL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ASQL_CONTROL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

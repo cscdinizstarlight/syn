@@ -1,0 +1,120 @@
+{
+	"name": "PL_TEST_MasterPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "RunPLTESTForEach",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_TEST_ForEach",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "OnSuccess Notification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "RunPLTESTForEach",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "NotifiyTeamsChannelPipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"runId": {
+							"value": "@activity('RunPLTESTForEach').output['pipelineRunId']",
+							"type": "Expression"
+						},
+						"name": {
+							"value": "@activity('RunPLTESTForEach').output['pipelineName']",
+							"type": "Expression"
+						},
+						"triggerTime": {
+							"value": "@activity('RunPLTESTForEach').ExecutionStartTime",
+							"type": "Expression"
+						},
+						"status": {
+							"value": "@activity('RunPLTESTForEach').Status",
+							"type": "Expression"
+						},
+						"message": "Pipeline - RunPLTESTForEach ran with success.",
+						"executionEndTime": {
+							"value": "@activity('RunPLTESTForEach').ExecutionEndTime",
+							"type": "Expression"
+						},
+						"runDuration": {
+							"value": "@activity('RunPLTESTForEach').Duration",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "OnFailure Notification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "RunPLTESTForEach",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "NotifiyTeamsChannelPipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"runId": {
+							"value": "@activity('RunPLTESTForEach').output['pipelineRunId']",
+							"type": "Expression"
+						},
+						"name": {
+							"value": "@activity('RunPLTESTForEach').output['pipelineName']",
+							"type": "Expression"
+						},
+						"triggerTime": {
+							"value": "@activity('RunPLTESTForEach').ExecutionStartTime",
+							"type": "Expression"
+						},
+						"status": {
+							"value": "@activity('RunPLTESTForEach').Status",
+							"type": "Expression"
+						},
+						"message": {
+							"value": "@activity('RunPLTESTForEach').Error['message']",
+							"type": "Expression"
+						},
+						"executionEndTime": {
+							"value": "@activity('RunPLTESTForEach').ExecutionEndTime",
+							"type": "Expression"
+						},
+						"runDuration": {
+							"value": "@activity('RunPLTESTForEach').Duration",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-25T03:40:59Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

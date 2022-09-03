@@ -1,0 +1,1092 @@
+{
+	"name": "PL_Cleansed_Rosterfy_Shift",
+	"properties": {
+		"activities": [
+			{
+				"name": "RosterfyShiftToCleansed",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "DeleteAnyFileFromStaging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "Rosterfy/Shift/Staging",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "datalake",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['object']['id']"
+								},
+								"sink": {
+									"name": "id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_id']"
+								},
+								"sink": {
+									"name": "event_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_shift_type_id']"
+								},
+								"sink": {
+									"name": "object_event_shift_type_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['min_demand']"
+								},
+								"sink": {
+									"name": "min_demand"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['max_demand']"
+								},
+								"sink": {
+									"name": "max_demand"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['leader_demand']"
+								},
+								"sink": {
+									"name": "leader_demand"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['start_timestamp']"
+								},
+								"sink": {
+									"name": "object_start_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['end_timestamp']"
+								},
+								"sink": {
+									"name": "object_end_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['timezone']"
+								},
+								"sink": {
+									"name": "timezone"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_confirmed_status_default']"
+								},
+								"sink": {
+									"name": "shift_confirmed_status_default"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_rejected_status_default']"
+								},
+								"sink": {
+									"name": "shift_rejected_status_default"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_withdraw_default']"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_default"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_confirm_limit']"
+								},
+								"sink": {
+									"name": "shift_can_confirm_limit"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_withdraw_limit']"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_limit"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checked_in_status_default']"
+								},
+								"sink": {
+									"name": "shift_checked_in_status_default"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['certificate_id']"
+								},
+								"sink": {
+									"name": "certificate_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_application_form_id']"
+								},
+								"sink": {
+									"name": "object_shift_application_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checkin_form_id']"
+								},
+								"sink": {
+									"name": "object_shift_checkin_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_attended_form_id']"
+								},
+								"sink": {
+									"name": "object_shift_attended_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checkout_form_id']"
+								},
+								"sink": {
+									"name": "object_shift_checkout_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_precheckin_form_id']"
+								},
+								"sink": {
+									"name": "object_shift_precheckin_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['training_ids']"
+								},
+								"sink": {
+									"name": "training_ids",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['role_offer_id']"
+								},
+								"sink": {
+									"name": "object_role_offer_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['role_offer_address']"
+								},
+								"sink": {
+									"name": "object_role_offer_address"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_enable_waitlist_default']"
+								},
+								"sink": {
+									"name": "shift_enable_waitlist_default"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['max_waitlist']"
+								},
+								"sink": {
+									"name": "max_waitlist"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['minimum_dob']"
+								},
+								"sink": {
+									"name": "minimum_dob",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['minimum_age']"
+								},
+								"sink": {
+									"name": "object_minimum_age",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin']"
+								},
+								"sink": {
+									"name": "object_self_checkin"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin_open']"
+								},
+								"sink": {
+									"name": "self_checkin_open"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin_close']"
+								},
+								"sink": {
+									"name": "self_checkin_close"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkout_close']"
+								},
+								"sink": {
+									"name": "self_checkout_close"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_precheckin_open']"
+								},
+								"sink": {
+									"name": "shift_precheckin_open",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['post_feedback_form']"
+								},
+								"sink": {
+									"name": "object_post_feedback_form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['is_virtual']"
+								},
+								"sink": {
+									"name": "object_is_virtual"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['geofence_checkin_limit']"
+								},
+								"sink": {
+									"name": "geofence_checkin_limit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['publish']"
+								},
+								"sink": {
+									"name": "object_publish"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['public']"
+								},
+								"sink": {
+									"name": "public"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['sort_order']"
+								},
+								"sink": {
+									"name": "sort_order"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['is_cancelled']"
+								},
+								"sink": {
+									"name": "is_cancelled"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['deleted_at']"
+								},
+								"sink": {
+									"name": "deleted_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['created_at']"
+								},
+								"sink": {
+									"name": "created_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['wish_sparkle_details']"
+								},
+								"sink": {
+									"name": "object_wish_sparkle_details"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['wish_sparkle_name']"
+								},
+								"sink": {
+									"name": "object_wish_sparkle_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['name']"
+								},
+								"sink": {
+									"name": "object_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_shift_description']"
+								},
+								"sink": {
+									"name": "event_shift_description"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['iso']"
+								},
+								"sink": {
+									"name": "iso"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['coordinates']['latitude']"
+								},
+								"sink": {
+									"name": "object_address_coordinates_latitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['coordinates']['longitude']"
+								},
+								"sink": {
+									"name": "object_address_coordinates_longitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_1']"
+								},
+								"sink": {
+									"name": "street_address_1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_2']"
+								},
+								"sink": {
+									"name": "street_address_2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_3']"
+								},
+								"sink": {
+									"name": "street_address_3",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['city']"
+								},
+								"sink": {
+									"name": "city"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['postcode']"
+								},
+								"sink": {
+									"name": "postcode"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['region']"
+								},
+								"sink": {
+									"name": "region"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['country']"
+								},
+								"sink": {
+									"name": "country"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['latitude']"
+								},
+								"sink": {
+									"name": "object_address_latitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['longitude']"
+								},
+								"sink": {
+									"name": "object_address_longitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['rrn']"
+								},
+								"sink": {
+									"name": "rrn"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp']"
+								},
+								"sink": {
+									"name": "nice_end_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__date']"
+								},
+								"sink": {
+									"name": "end_timestamp__date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__time']"
+								},
+								"sink": {
+									"name": "end_timestamp__time"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__offset']"
+								},
+								"sink": {
+									"name": "end_timestamp__offset"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_shift_type_id']"
+								},
+								"sink": {
+									"name": "nice_event_shift_type_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_shift_type_id:value']"
+								},
+								"sink": {
+									"name": "event_shift_type_id:value"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['is_virtual']"
+								},
+								"sink": {
+									"name": "nice_is_virtual"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['minimum_age']"
+								},
+								"sink": {
+									"name": "nice_minimum_age"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['name']"
+								},
+								"sink": {
+									"name": "nice_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['post_feedback_form']"
+								},
+								"sink": {
+									"name": "nice_post_feedback_form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['post_feedback_form:value']"
+								},
+								"sink": {
+									"name": "post_feedback_form:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['publish']"
+								},
+								"sink": {
+									"name": "nice_publish"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['role_offer_address']"
+								},
+								"sink": {
+									"name": "nice_role_offer_address"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['role_offer_id']"
+								},
+								"sink": {
+									"name": "nice_role_offer_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['role_offer_id:value']"
+								},
+								"sink": {
+									"name": "role_offer_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['self_checkin']"
+								},
+								"sink": {
+									"name": "nice_self_checkin"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_application_form_id']"
+								},
+								"sink": {
+									"name": "nice_shift_application_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_application_form_id:value']"
+								},
+								"sink": {
+									"name": "shift_application_form_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_attended_form_id']"
+								},
+								"sink": {
+									"name": "nice_shift_attended_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_attended_form_id:value']"
+								},
+								"sink": {
+									"name": "shift_attended_form_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkin_form_id']"
+								},
+								"sink": {
+									"name": "nice_shift_checkin_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkin_form_id:value']"
+								},
+								"sink": {
+									"name": "shift_checkin_form_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkout_form_id']"
+								},
+								"sink": {
+									"name": "nice_shift_checkout_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkout_form_id:value']"
+								},
+								"sink": {
+									"name": "shift_checkout_form_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_precheckin_form_id']"
+								},
+								"sink": {
+									"name": "nice_shift_precheckin_form_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_precheckin_form_id:value']"
+								},
+								"sink": {
+									"name": "shift_precheckin_form_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp']"
+								},
+								"sink": {
+									"name": "nice_start_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__date']"
+								},
+								"sink": {
+									"name": "start_timestamp__date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__time']"
+								},
+								"sink": {
+									"name": "start_timestamp__time"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__offset']"
+								},
+								"sink": {
+									"name": "start_timestamp__offset"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['visibility_hide_groups']"
+								},
+								"sink": {
+									"name": "visibility_hide_groups"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['visibility_show_groups']"
+								},
+								"sink": {
+									"name": "visibility_show_groups"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['wish_sparkle_details']"
+								},
+								"sink": {
+									"name": "nice_wish_sparkle_details"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['wish_sparkle_name']"
+								},
+								"sink": {
+									"name": "nice_wish_sparkle_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['info']"
+								},
+								"sink": {
+									"name": "info"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_shift_link_id']"
+								},
+								"sink": {
+									"name": "event_shift_link_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['account_id']"
+								},
+								"sink": {
+									"name": "account_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['account_url']"
+								},
+								"sink": {
+									"name": "account_url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_type_name']"
+								},
+								"sink": {
+									"name": "shift_type_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['post_shift_feedback_form_completed_at']"
+								},
+								"sink": {
+									"name": "post_shift_feedback_form_completed_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['pre_checkin_form_completed_at']"
+								},
+								"sink": {
+									"name": "pre_checkin_form_completed_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_name']"
+								},
+								"sink": {
+									"name": "event_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['address']"
+								},
+								"sink": {
+									"name": "address"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['address_oneline']"
+								},
+								"sink": {
+									"name": "address_oneline"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['read']"
+								},
+								"sink": {
+									"name": "read"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['update']"
+								},
+								"sink": {
+									"name": "update"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['delete']"
+								},
+								"sink": {
+									"name": "delete"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['apply']"
+								},
+								"sink": {
+									"name": "apply"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['apply_error']"
+								},
+								"sink": {
+									"name": "apply_error",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['apply_error_code']"
+								},
+								"sink": {
+									"name": "apply_error_code"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['confirm']"
+								},
+								"sink": {
+									"name": "confirm"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['reject']"
+								},
+								"sink": {
+									"name": "reject"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['selfCheckin']"
+								},
+								"sink": {
+									"name": "selfCheckin"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['selfCheckout']"
+								},
+								"sink": {
+									"name": "selfCheckout"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['submitAttendedForm']"
+								},
+								"sink": {
+									"name": "submitAttendedForm"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['precheckin']"
+								},
+								"sink": {
+									"name": "precheckin"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['applyWaitlist']"
+								},
+								"sink": {
+									"name": "applyWaitlist"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['cancel']"
+								},
+								"sink": {
+									"name": "cancel"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_Shift",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Cleansed_Rosterfy_Shift",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DeleteAnyFileFromStaging",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Cleansed_Rosterfy_Shift",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": false,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-08-26T05:41:32Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

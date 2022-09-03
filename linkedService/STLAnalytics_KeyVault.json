@@ -1,0 +1,11 @@
+{
+	"name": "STLAnalytics_KeyVault",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://stlanalyticskeyvault.vault.azure.net/"
+		}
+	}
+}

@@ -1,0 +1,124 @@
+{
+	"name": "PL_Raw_Rosterfy_User_Archive",
+	"properties": {
+		"description": "To archive raw files from Rosterfy",
+		"activities": [
+			{
+				"name": "SetMonthVariable",
+				"description": "Test setting Month variable in MM format",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "varMonth",
+					"value": {
+						"value": "@utcnow('MM')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "CopyRosterfyUsertoArchive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SetMonthVariable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_User",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_User_Archive",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@concat('Rosterfy/User/', formatDateTime(utcnow(), 'yyyy'), '/', formatDateTime(utcnow(), 'MM'), '/', formatDateTime(utcnow(), 'dd'), '/') ",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "DeleteRosterfyUserRaw",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CopyRosterfyUsertoArchive",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Raw_Rosterfy_User",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": false,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"variables": {
+			"varMonth": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-16T03:41:11Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

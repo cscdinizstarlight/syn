@@ -1,0 +1,29 @@
+{
+	"name": "LSRestRosterfy",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"description": "Rosterfy API via bearer token",
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://getconnected.rosterfy.com.au/api/v2",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"Authorization": {
+					"type": "AzureKeyVaultSecret",
+					"store": {
+						"referenceName": "STLAnalytics_KeyVault",
+						"type": "LinkedServiceReference"
+					},
+					"secretName": "RosterfyAccessToken",
+					"secretVersion": "ec0dc2e461064e268c135f8a331ba784"
+				}
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

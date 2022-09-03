@@ -1,0 +1,1280 @@
+{
+	"name": "PL_Cleansed_Rosterfy_Event",
+	"properties": {
+		"activities": [
+			{
+				"name": "RosterfyEventToCleansed",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "Rosterfy/Event/Staging",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "datalake",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['object']['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['parent_id']"
+								},
+								"sink": {
+									"name": "parent_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_template_id']"
+								},
+								"sink": {
+									"name": "object_event_template_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['path']"
+								},
+								"sink": {
+									"name": "path",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_type_id']"
+								},
+								"sink": {
+									"name": "object_event_type_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['timezone']"
+								},
+								"sink": {
+									"name": "timezone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['start_timestamp']"
+								},
+								"sink": {
+									"name": "object_start_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['end_timestamp']"
+								},
+								"sink": {
+									"name": "object_end_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['apps_open_timestamp']"
+								},
+								"sink": {
+									"name": "object_apps_open_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['apps_close_timestamp']"
+								},
+								"sink": {
+									"name": "object_apps_close_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_status_default']"
+								},
+								"sink": {
+									"name": "shift_status_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['max_shift_apps_per_user']"
+								},
+								"sink": {
+									"name": "max_shift_apps_per_user",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['min_shift_apps_per_user']"
+								},
+								"sink": {
+									"name": "min_shift_apps_per_user",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['min_shift_apps_per_shift_type']"
+								},
+								"sink": {
+									"name": "min_shift_apps_per_shift_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['gap_between_shifts']"
+								},
+								"sink": {
+									"name": "gap_between_shifts",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_confirmed_status_default']"
+								},
+								"sink": {
+									"name": "shift_confirmed_status_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_rejected_status_default']"
+								},
+								"sink": {
+									"name": "shift_rejected_status_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_withdraw_default']"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_confirm_limit']"
+								},
+								"sink": {
+									"name": "shift_can_confirm_limit",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_can_withdraw_limit']"
+								},
+								"sink": {
+									"name": "shift_can_withdraw_limit",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checked_in_status_default']"
+								},
+								"sink": {
+									"name": "shift_checked_in_status_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['certificate_id']"
+								},
+								"sink": {
+									"name": "certificate_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_application_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_application_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checkin_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_checkin_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_attended_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_attended_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_checkout_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_checkout_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_feedback_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_feedback_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_precheckin_form_id_default']"
+								},
+								"sink": {
+									"name": "object_shift_precheckin_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['training_ids']"
+								},
+								"sink": {
+									"name": "training_ids",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['banner_image']"
+								},
+								"sink": {
+									"name": "banner_image",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['grid_image']"
+								},
+								"sink": {
+									"name": "grid_image",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['minimum_dob']"
+								},
+								"sink": {
+									"name": "minimum_dob",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['minimum_age']"
+								},
+								"sink": {
+									"name": "minimum_age",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['role_offer_address']"
+								},
+								"sink": {
+									"name": "object_role_offer_address",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['checkin_visible_attributes']"
+								},
+								"sink": {
+									"name": "checkin_visible_attributes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_filter_attributes']"
+								},
+								"sink": {
+									"name": "shift_filter_attributes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin']"
+								},
+								"sink": {
+									"name": "object_self_checkin",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin_open']"
+								},
+								"sink": {
+									"name": "self_checkin_open",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkin_close']"
+								},
+								"sink": {
+									"name": "self_checkin_close",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['self_checkout_close']"
+								},
+								"sink": {
+									"name": "self_checkout_close",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_precheckin_open_default']"
+								},
+								"sink": {
+									"name": "shift_precheckin_open_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['shift_enable_waitlist_default']"
+								},
+								"sink": {
+									"name": "shift_enable_waitlist_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['geofence_checkin_limit_default']"
+								},
+								"sink": {
+									"name": "geofence_checkin_limit_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['max_waitlist']"
+								},
+								"sink": {
+									"name": "max_waitlist",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['post_feedback_form']"
+								},
+								"sink": {
+									"name": "post_feedback_form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['post_feedback_publish_at']"
+								},
+								"sink": {
+									"name": "post_feedback_publish_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['expression_of_interest_form']"
+								},
+								"sink": {
+									"name": "expression_of_interest_form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['is_virtual']"
+								},
+								"sink": {
+									"name": "object_is_virtual",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['publish']"
+								},
+								"sink": {
+									"name": "object_publish",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['promoted']"
+								},
+								"sink": {
+									"name": "object_promoted",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['public']"
+								},
+								"sink": {
+									"name": "public",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['public_shift']"
+								},
+								"sink": {
+									"name": "public_shift",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['public_shift_default']"
+								},
+								"sink": {
+									"name": "public_shift_default",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['token']"
+								},
+								"sink": {
+									"name": "token",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['deleted_at']"
+								},
+								"sink": {
+									"name": "deleted_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['name']"
+								},
+								"sink": {
+									"name": "object_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['post_feedback']"
+								},
+								"sink": {
+									"name": "post_feedback",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['iso']"
+								},
+								"sink": {
+									"name": "iso",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['coordinates']['latitude']"
+								},
+								"sink": {
+									"name": "object_address_coordinates_latitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['coordinates']['longitude']"
+								},
+								"sink": {
+									"name": "object_address_coordinates_longitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_1']"
+								},
+								"sink": {
+									"name": "street_address_1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_2']"
+								},
+								"sink": {
+									"name": "street_address_2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['street_address_3']"
+								},
+								"sink": {
+									"name": "street_address_3",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['postcode']"
+								},
+								"sink": {
+									"name": "postcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['region']"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['latitude']"
+								},
+								"sink": {
+									"name": "object_address_latitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['address']['longitude']"
+								},
+								"sink": {
+									"name": "object_address_longitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['visibility_show_groups'][0]"
+								},
+								"sink": {
+									"name": "object_visibility_show_groups'][",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['visibility_hide_groups'][0]"
+								},
+								"sink": {
+									"name": "object_visibility_hide_groups'][",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['visibility_show_roleoffer'][0]"
+								},
+								"sink": {
+									"name": "object_visibility_show_roleoffer'][",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['rrn']"
+								},
+								"sink": {
+									"name": "rrn",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_close_timestamp']"
+								},
+								"sink": {
+									"name": "nice_apps_close_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_close_timestamp__date']"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_close_timestamp__time']"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_close_timestamp__offset']"
+								},
+								"sink": {
+									"name": "apps_close_timestamp__offset",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_open_timestamp']"
+								},
+								"sink": {
+									"name": "nice_apps_open_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_open_timestamp__date']"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_open_timestamp__time']"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apps_open_timestamp__offset']"
+								},
+								"sink": {
+									"name": "apps_open_timestamp__offset",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp']"
+								},
+								"sink": {
+									"name": "nice_end_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__date']"
+								},
+								"sink": {
+									"name": "end_timestamp__date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__time']"
+								},
+								"sink": {
+									"name": "end_timestamp__time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__offset']"
+								},
+								"sink": {
+									"name": "end_timestamp__offset",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_template_id']"
+								},
+								"sink": {
+									"name": "nice_event_template_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_template_id:value']"
+								},
+								"sink": {
+									"name": "event_template_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_type_id']"
+								},
+								"sink": {
+									"name": "nice_event_type_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_type_id:value']"
+								},
+								"sink": {
+									"name": "event_type_id:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['is_virtual']"
+								},
+								"sink": {
+									"name": "nice_is_virtual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['name']"
+								},
+								"sink": {
+									"name": "nice_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['promoted']"
+								},
+								"sink": {
+									"name": "nice_promoted",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['publish']"
+								},
+								"sink": {
+									"name": "nice_publish",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['role_offer_address']"
+								},
+								"sink": {
+									"name": "nice_role_offer_address",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['self_checkin']"
+								},
+								"sink": {
+									"name": "nice_self_checkin",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_application_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_application_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_application_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_application_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_attended_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_attended_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_attended_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_attended_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkin_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_checkin_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkin_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_checkin_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkout_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_checkout_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_checkout_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_checkout_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_feedback_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_feedback_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_feedback_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_feedback_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_precheckin_form_id_default']"
+								},
+								"sink": {
+									"name": "nice_shift_precheckin_form_id_default",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_precheckin_form_id_default:value']"
+								},
+								"sink": {
+									"name": "shift_precheckin_form_id_default:value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp']"
+								},
+								"sink": {
+									"name": "nice_start_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__date']"
+								},
+								"sink": {
+									"name": "start_timestamp__date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__time']"
+								},
+								"sink": {
+									"name": "start_timestamp__time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__offset']"
+								},
+								"sink": {
+									"name": "start_timestamp__offset",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['visibility_hide_groups']"
+								},
+								"sink": {
+									"name": "visibility_hide_groups",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['visibility_show_groups']"
+								},
+								"sink": {
+									"name": "visibility_show_groups",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['full_name']"
+								},
+								"sink": {
+									"name": "full_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_type_name']"
+								},
+								"sink": {
+									"name": "event_type_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['grid_list_image']"
+								},
+								"sink": {
+									"name": "grid_list_image",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['min_shifts']"
+								},
+								"sink": {
+									"name": "min_shifts",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['applied_shift_count']"
+								},
+								"sink": {
+									"name": "applied_shift_count",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['post_event_feedback_form_completed_at']"
+								},
+								"sink": {
+									"name": "post_event_feedback_form_completed_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['expression_of_interest_form_completed_at']"
+								},
+								"sink": {
+									"name": "expression_of_interest_form_completed_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['address']"
+								},
+								"sink": {
+									"name": "address",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['address_oneline']"
+								},
+								"sink": {
+									"name": "address_oneline",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apply']['code']"
+								},
+								"sink": {
+									"name": "code",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['apply']['message']"
+								},
+								"sink": {
+									"name": "message",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['relations'][0]"
+								},
+								"sink": {
+									"name": "relations'][",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['read']"
+								},
+								"sink": {
+									"name": "read",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['update']"
+								},
+								"sink": {
+									"name": "update",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['delete']"
+								},
+								"sink": {
+									"name": "delete",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['permissions']['apply']"
+								},
+								"sink": {
+									"name": "apply",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['attributes'][0]"
+								},
+								"sink": {
+									"name": "attributes'][",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_Event",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Cleansed_Rosterfy_Event",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-21T00:13:59Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,450 @@
+{
+	"name": "PL_Cleansed_Rosterfy_BookedShift",
+	"properties": {
+		"activities": [
+			{
+				"name": "RosterfyBookedShiftToCleansed",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "Rosterfy/BookedShift/Staging",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "datalake",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['object']['id']"
+								},
+								"sink": {
+									"name": "object_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_shift_id']"
+								},
+								"sink": {
+									"name": "event_shift_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['user_id']"
+								},
+								"sink": {
+									"name": "user_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['post_shift_feedback_form_completed_at']"
+								},
+								"sink": {
+									"name": "post_shift_feedback_form_completed_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['precheckin_form_completed_at']"
+								},
+								"sink": {
+									"name": "precheckin_form_completed_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['event_shift_status_id']"
+								},
+								"sink": {
+									"name": "object_event_shift_status_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['is_leader']"
+								},
+								"sink": {
+									"name": "object_is_leader",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['break']"
+								},
+								"sink": {
+									"name": "break"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['start_timestamp']"
+								},
+								"sink": {
+									"name": "object_start_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['end_timestamp']"
+								},
+								"sink": {
+									"name": "object_end_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['cost']"
+								},
+								"sink": {
+									"name": "cost"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['cost_meta']"
+								},
+								"sink": {
+									"name": "cost_meta",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['latitude']"
+								},
+								"sink": {
+									"name": "object_latitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['longitude']"
+								},
+								"sink": {
+									"name": "object_longitude",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['deleted_at']"
+								},
+								"sink": {
+									"name": "object_deleted_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['created_at']"
+								},
+								"sink": {
+									"name": "object_created_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['object']['updated_at']"
+								},
+								"sink": {
+									"name": "object_updated_at"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['rrn']"
+								},
+								"sink": {
+									"name": "nice_rrn"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp']"
+								},
+								"sink": {
+									"name": "nice_end_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__date']"
+								},
+								"sink": {
+									"name": "end_timestamp__date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__time']"
+								},
+								"sink": {
+									"name": "end_timestamp__time"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['end_timestamp__offset']"
+								},
+								"sink": {
+									"name": "end_timestamp__offset"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_shift_status_id']"
+								},
+								"sink": {
+									"name": "nice_event_shift_status_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_shift_status_id:value']"
+								},
+								"sink": {
+									"name": "event_shift_status_id:value"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['is_leader']"
+								},
+								"sink": {
+									"name": "nice_is_leader"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp']"
+								},
+								"sink": {
+									"name": "nice_start_timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__date']"
+								},
+								"sink": {
+									"name": "start_timestamp__date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__time']"
+								},
+								"sink": {
+									"name": "start_timestamp__time"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['start_timestamp__offset']"
+								},
+								"sink": {
+									"name": "start_timestamp__offset"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['attended']['seconds']"
+								},
+								"sink": {
+									"name": "attended_seconds"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['attended']['minutes']"
+								},
+								"sink": {
+									"name": "attended_minutes"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['attended']['hours']"
+								},
+								"sink": {
+									"name": "attended_hours"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['attended']['pretty']"
+								},
+								"sink": {
+									"name": "attended_pretty",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_id']"
+								},
+								"sink": {
+									"name": "event_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['event_name']"
+								},
+								"sink": {
+									"name": "event_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['is_event_leader']"
+								},
+								"sink": {
+									"name": "is_event_leader"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_name']"
+								},
+								"sink": {
+									"name": "shift_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_start_timestamp']"
+								},
+								"sink": {
+									"name": "shift_start_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_end_timestamp']"
+								},
+								"sink": {
+									"name": "shift_end_timestamp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['shift_timezone']"
+								},
+								"sink": {
+									"name": "shift_timezone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['requires_pre_checkin']"
+								},
+								"sink": {
+									"name": "requires_pre_checkin"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['has_shift_attended_form']"
+								},
+								"sink": {
+									"name": "has_shift_attended_form"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['has_checkin_form']"
+								},
+								"sink": {
+									"name": "has_checkin_form"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['has_checkout_form']"
+								},
+								"sink": {
+									"name": "has_checkout_form"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_Rosterfy_BookedShift",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Cleansed_Rosterfy_BookedShift",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-21T00:21:56Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

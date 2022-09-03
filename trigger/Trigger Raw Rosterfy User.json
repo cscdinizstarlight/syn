@@ -1,0 +1,25 @@
+{
+	"name": "Trigger Raw Rosterfy User",
+	"properties": {
+		"description": "Starts at 1410 UTC (0010 during AEST or 0110 during AEDT)",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_Raw_Rosterfy_User",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-03-11T14:10:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

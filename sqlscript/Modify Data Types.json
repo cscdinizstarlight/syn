@@ -1,0 +1,20 @@
+{
+	"name": "Modify Data Types",
+	"properties": {
+		"folder": {
+			"name": "SQL Serverless"
+		},
+		"content": {
+			"query": "\nCREATE EXTERNAL TABLE [LDW].[extRosterfyUserNEW4] WITH (\n        LOCATION = 'Rosterfy/User/CETASNEW4',\n        DATA_SOURCE = ExtDSCurated,\n        FILE_FORMAT = ParquetFormat\n) AS\nSELECT\n    *\nFROM\n(\n    SELECT\n    RANK() OVER (PARTITION by id ORDER BY InsertedOn DESC) as isCurrent\n     --, *\n    ,id\n    ,email\n    ,object_first_name\n    ,object_last_name\n    ,object_team_member_id\n    ,object_employment_status\n    ,object_state\n    ,nice_name\n    ,updated_hours\n    ,CONVERT(datetime, created_at, 120) as createdAt\n    ,updated_at\n\n    FROM \n    OPENROWSET(\n        BULK 'Rosterfy/User/*.parquet',\n        DATA_SOURCE = 'ExtDSCurated',\n        FORMAT = 'PARQUET'\n    ) WITH (\n        id varchar(20),\n        email varchar(100),\n        object_first_name varchar(50),\n        object_last_name varchar(50),\n        object_team_member_id varchar(50),\n        object_employment_status varchar(50),\n        object_state varchar(20),\n        nice_name varchar(100),\n        updated_hours varchar(20),\n        created_at varchar(20),\n        updated_at varchar(20),\n        InsertedOn varchar(30)\n    )  AS r\n) AS t\nWHERE isCurrent = 1\n;\n\nSELECT top 20 * FROM [LDW].[vwRosterfyUser];\n\nWHERE object_first_name = 'Gavin';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "logicalDW",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

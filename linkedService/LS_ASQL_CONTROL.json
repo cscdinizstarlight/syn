@@ -1,0 +1,22 @@
+{
+	"name": "LS_ASQL_CONTROL",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_ASA_KV_DataIntegration",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ASQL-Control-ConnectionString"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
