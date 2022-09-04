@@ -6,10 +6,10 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_Raw_Rosterfy_User",
+						"referenceName": "DS_Raw_FolderPath_Json",
 						"type": "DatasetReference"
 					},
-					"name": "JSONRawRosterfyUser"
+					"name": "JSONRaw"
 				}
 			],
 			"sinks": [
@@ -31,7 +31,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          object as (id as string, id_token as string, email as string, first_name as string, middle_name as string, last_name as string, preferred_name as string, phone as string, dob as string, picture as string, picture_status as integer, is_subscribed as integer, is_unreachable as integer, terms as integer, rating as string, shift_privacy as integer, is_team_leader as integer, email_verified as integer, verify_email_token as string, login_lockout_attempts as integer, login_lockout_at as string, login_lockout_email_sent_at as string, last_login_at as string, delete_requested_at as string, deleted_at as string, created_at as string, updated_at as string, team_member_id as string, state as string, employment_status as string, address as (iso as string, coordinates as (latitude as string, longitude as string), street_address_1 as string, street_address_2 as string, street_address_3 as string, city as string, postcode as string, region as string, country as string, latitude as string, longitude as string)),",
+				"          object as (id as integer, id_token as string, email as string, first_name as string, middle_name as string, last_name as string, preferred_name as string, phone as string, dob as string, picture as string, picture_status as integer, is_subscribed as integer, is_unreachable as integer, terms as integer, rating as string, shift_privacy as integer, is_team_leader as integer, email_verified as integer, verify_email_token as string, login_lockout_attempts as integer, login_lockout_at as string, login_lockout_email_sent_at as string, last_login_at as string, delete_requested_at as string, deleted_at as string, created_at as string, updated_at as string, team_member_id as string, state as string, employment_status as string, address as (iso as string, coordinates as (latitude as string, longitude as string), street_address_1 as string, street_address_2 as string, street_address_3 as string, city as string, postcode as string, region as string, country as string, latitude as string, longitude as string)),",
 				"          nice as (rrn as string, email_verified as string, first_name as string, is_subscribed as string, is_team_leader as string, last_name as string, middle_name as string, phone as string, {phone:raw} as string, preferred_name as string, shift_privacy as string, terms as string, employment_status as string, state as string, team_member_id as string, name as string, age as integer, address as string, address_oneline as string, info as string, background_check_user as string[], preferred_first_name as string, available_by_default as boolean, google2fa_enabled as boolean, picture_status as string, delete_requested as boolean, updated_hours as integer, login_locked as boolean, duplicate_status as string),",
 				"          relations as string[],",
 				"          permissions as (read as boolean, update as boolean, delete as boolean, impersonate as boolean),",
@@ -41,9 +41,9 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine',",
-				"     backslashEscape: true) ~> JSONRawRosterfyUser",
+				"     backslashEscape: true) ~> JSONRaw",
 				"mapJSONHierarchySubcolumns derive(nice_address = replace(nice_address, \"\\n\", \" \")) ~> replaceNewlineChar",
-				"JSONRawRosterfyUser select(mapColumn(",
+				"JSONRaw select(mapColumn(",
 				"          each(object,match(true()),",
 				"               'object_'+$$ = $$),",
 				"          each(nice,match(true()),",
