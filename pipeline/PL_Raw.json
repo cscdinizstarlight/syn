@@ -5,14 +5,7 @@
 			{
 				"name": "RosterfyUserToLake",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "DeleteAnyFileFromStaging",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -69,8 +62,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_Raw_Rosterfy_User",
-						"type": "DatasetReference"
+						"referenceName": "DS_Raw_FolderPath_Json",
+						"type": "DatasetReference",
+						"parameters": {
+							"Directory": {
+								"value": "@pipeline().parameters.SinkFolder",
+								"type": "Expression"
+							}
+						}
 					},
 					"enableLogging": false,
 					"storeSettings": {
@@ -79,8 +78,94 @@
 						"enablePartitionDiscovery": false
 					}
 				}
+			},
+			{
+				"name": "Get Key Vault Secret",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteAnyFileFromStaging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://stlanalyticskeyvault.vault.azure.net/secrets/', pipeline().parameters.KeyVault, '?api-version=7.0')",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Get Key Vault Secret",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(pipeline().parameters.BaseUrl, '/', pipeline().parameters.Query)",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"headers": {
+						"Authorization": {
+							"value": "@activity('Get Key Vault Secret').output.value",
+							"type": "Expression"
+						}
+					}
+				}
 			}
 		],
+		"parameters": {
+			"SinkFolder": {
+				"type": "string"
+			},
+			"KeyVault": {
+				"type": "string"
+			},
+			"BaseUrl": {
+				"type": "string"
+			},
+			"Query": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Metadata-driven Pipeline"
 		},
