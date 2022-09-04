@@ -115,7 +115,7 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "Source REST API Call",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -150,6 +150,44 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "Save Output To Blob",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Source REST API Call",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(pipeline().parameters.DataLakeSA, pipeline().parameters.SinkFolder, pipeline().parameters.DataLakeSA)",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "PUT",
+					"headers": {
+						"x-ms-blob-type": "BlockBlob"
+					},
+					"body": {
+						"value": "@activity('Source REST API Call').output",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -163,6 +201,12 @@
 				"type": "string"
 			},
 			"Query": {
+				"type": "string"
+			},
+			"DataLakeURL": {
+				"type": "string"
+			},
+			"DataLakeSA": {
 				"type": "string"
 			}
 		},
