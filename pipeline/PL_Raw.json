@@ -64,7 +64,6 @@
 							"value": "@activity('Get Key Vault Secret').output.value",
 							"type": "Expression"
 						},
-						"Content-Type": "application/json",
 						"Accept": "application/json"
 					}
 				}
