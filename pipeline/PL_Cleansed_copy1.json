@@ -1,0 +1,657 @@
+{
+	"name": "PL_Cleansed_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "RawToCleansed",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['$schema']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['id']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['id_token']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['account_id']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['email']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['first_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['middle_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['last_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['preferred_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['phone']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['dob']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['picture']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['picture_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['is_subscribed']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['is_unreachable']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['terms']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['rating']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['shift_privacy']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['is_team_leader']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['email_verified']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['verify_email_token']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['login_lockout_attempts']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['login_lockout_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['login_lockout_email_sent_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['last_login_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['delete_requested_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['deleted_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['created_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['updated_at']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['deleted_by']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['team_member_id']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['state']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['employment_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['interests']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['iso']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['coordinates']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['coordinates']['properties']['latitude']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['coordinates']['properties']['longitude']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['coordinates']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['street_address_1']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['street_address_2']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['street_address_3']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['city']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['postcode']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['region']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['country']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['latitude']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['properties']['longitude']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['properties']['address']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['object']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['rrn']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['email_verified']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['first_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['interests']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['interests:value']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['interests:array']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['is_subscribed']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['is_team_leader']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['last_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['middle_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['phone']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['phone:raw']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['preferred_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['shift_privacy']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['terms']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['employment_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['state']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['team_member_id']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['age']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['address']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['address_oneline']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['info']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['background_check_user']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['background_check_user']['items']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['given_names']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['preferred_first_name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['available_by_default']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['google2fa_enabled']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['picture_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['delete_requested']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['updated_hours']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['login_locked']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['properties']['duplicate_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['nice']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['relations']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['relations']['items']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['permissions']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['permissions']['properties']['read']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['permissions']['properties']['update']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['permissions']['properties']['delete']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['permissions']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['interests']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['interests']['properties']['name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['interests']['properties']['label']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['interests']['properties']['type']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['interests']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['employment_status']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['employment_status']['properties']['name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['employment_status']['properties']['label']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['employment_status']['properties']['type']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['employment_status']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['state']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['state']['properties']['name']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['state']['properties']['label']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['state']['properties']['type']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['properties']['state']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['properties']['attributes']['required'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['items'][0]['required'][0]"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Json_test",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "csc_test",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"SinkFolder": {
+				"type": "string",
+				"defaultValue": "Rosterfy/User/2022/09/05"
+			},
+			"FileName": {
+				"type": "string",
+				"defaultValue": "user_3d9b2584cbff48eeb15fa7cdad222343"
+			}
+		},
+		"folder": {
+			"name": "Metadata-driven Pipeline"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-08-26T05:41:32Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

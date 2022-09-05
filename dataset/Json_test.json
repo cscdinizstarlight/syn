@@ -1,0 +1,957 @@
+{
+	"name": "Json_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "user_schema.json",
+				"folderPath": "Cris",
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"$schema": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"items": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"properties": {
+								"type": "object",
+								"properties": {
+									"object": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string"
+											},
+											"properties": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"id_token": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"account_id": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"email": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"first_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"middle_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"last_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"preferred_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"phone": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"dob": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"picture": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"picture_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"is_subscribed": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"is_unreachable": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"terms": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"rating": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"shift_privacy": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"is_team_leader": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"email_verified": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"verify_email_token": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"login_lockout_attempts": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"login_lockout_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"login_lockout_email_sent_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"last_login_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"delete_requested_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"deleted_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"created_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"updated_at": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"deleted_by": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"team_member_id": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"state": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"employment_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"interests": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"address": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															},
+															"properties": {
+																"type": "object",
+																"properties": {
+																	"iso": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"coordinates": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			},
+																			"properties": {
+																				"type": "object",
+																				"properties": {
+																					"latitude": {
+																						"type": "object",
+																						"properties": {
+																							"type": {
+																								"type": "string"
+																							}
+																						}
+																					},
+																					"longitude": {
+																						"type": "object",
+																						"properties": {
+																							"type": {
+																								"type": "string"
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"required": {
+																				"type": "array",
+																				"items": {
+																					"type": "string"
+																				}
+																			}
+																		}
+																	},
+																	"street_address_1": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"street_address_2": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"street_address_3": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"city": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"postcode": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"region": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"country": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"latitude": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"longitude": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																}
+															},
+															"required": {
+																"type": "array",
+																"items": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												}
+											},
+											"required": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									},
+									"nice": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string"
+											},
+											"properties": {
+												"type": "object",
+												"properties": {
+													"rrn": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"email_verified": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"first_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"interests": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"interests:value": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"interests:array": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"is_subscribed": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"is_team_leader": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"last_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"middle_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"phone": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"phone:raw": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"preferred_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"shift_privacy": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"terms": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"employment_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"state": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"team_member_id": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"age": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"address": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"address_oneline": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"info": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"background_check_user": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															},
+															"items": {
+																"type": "object"
+															}
+														}
+													},
+													"given_names": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"preferred_first_name": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"available_by_default": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"google2fa_enabled": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"picture_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"delete_requested": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"updated_hours": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"login_locked": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"duplicate_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											},
+											"required": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									},
+									"relations": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string"
+											},
+											"items": {
+												"type": "object"
+											}
+										}
+									},
+									"permissions": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string"
+											},
+											"properties": {
+												"type": "object",
+												"properties": {
+													"read": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"update": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													},
+													"delete": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											},
+											"required": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									},
+									"attributes": {
+										"type": "object",
+										"properties": {
+											"type": {
+												"type": "string"
+											},
+											"properties": {
+												"type": "object",
+												"properties": {
+													"interests": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															},
+															"properties": {
+																"type": "object",
+																"properties": {
+																	"name": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"label": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"type": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																}
+															},
+															"required": {
+																"type": "array",
+																"items": {
+																	"type": "string"
+																}
+															}
+														}
+													},
+													"employment_status": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															},
+															"properties": {
+																"type": "object",
+																"properties": {
+																	"name": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"label": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"type": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																}
+															},
+															"required": {
+																"type": "array",
+																"items": {
+																	"type": "string"
+																}
+															}
+														}
+													},
+													"state": {
+														"type": "object",
+														"properties": {
+															"type": {
+																"type": "string"
+															},
+															"properties": {
+																"type": "object",
+																"properties": {
+																	"name": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"label": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	},
+																	"type": {
+																		"type": "object",
+																		"properties": {
+																			"type": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																}
+															},
+															"required": {
+																"type": "array",
+																"items": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												}
+											},
+											"required": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							},
+							"required": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
