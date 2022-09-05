@@ -88,7 +88,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(pipeline().parameters.DataLakeSA, pipeline().parameters.SinkFolder, pipeline().parameters.DataLakeSA)",
+						"value": "@concat(pipeline().parameters.DataLakeURL, 'raw/',pipeline().parameters.SinkFolder, pipeline().parameters.DataLakeSA)",
 						"type": "Expression"
 					},
 					"connectVia": {
@@ -108,7 +108,8 @@
 		],
 		"parameters": {
 			"SinkFolder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Rosterfy/User"
 			},
 			"KeyVault": {
 				"type": "string",
@@ -123,10 +124,12 @@
 				"defaultValue": "user"
 			},
 			"DataLakeURL": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://stldatalakedev.blob.core.windows.net/"
 			},
 			"DataLakeSA": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "?sv=2020-02-10&st=2022-09-05T01%3A04%3A58Z&se=2033-09-30T01%3A04%3A00Z&sr=c&sp=racwlm&sig=i6Oj5lIPY6SDjdcEGKGQnBD6fDB4BJc0KkHN2EzLztA%3D"
 			}
 		},
 		"folder": {
