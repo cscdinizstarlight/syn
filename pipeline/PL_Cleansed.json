@@ -20,8 +20,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "Rosterfy/Shift/Staging",
-							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -1041,18 +1039,46 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_Raw_Rosterfy_Shift",
-						"type": "DatasetReference"
+						"referenceName": "DS_Raw_FilePath_Json",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": {
+								"value": "@pipeline().parameters.SinkFolder",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@concat(pipeline().parameters.FileName, '.json')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_Cleansed_Rosterfy_Shift",
-						"type": "DatasetReference"
+						"referenceName": "DS_Cleansed_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"SinkFolder": {
+								"value": "@pipeline().parameters.SinkFolder",
+								"type": "Expression"
+							},
+							"SinkFileName": {
+								"value": "@concat(pipeline().parameters.FileName, '.csv')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"SinkFolder": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Metadata-driven Pipeline"
 		},
