@@ -90,7 +90,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(pipeline().parameters.DataLakeURL, 'raw/',pipeline().parameters.SinkFolder,pipeline().TriggerId,'.json' ,pipeline().parameters.DataLakeSA)",
+						"value": "@concat(pipeline().parameters.DataLakeURL, 'raw/',pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'), '/',pipeline().parameters.EntityName, '_',pipeline().TriggerId,'.json',pipeline().parameters.DataLakeSA)\n",
 						"type": "Expression"
 					},
 					"connectVia": {
