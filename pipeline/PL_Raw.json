@@ -102,7 +102,7 @@
 						"x-ms-blob-type": "BlockBlob"
 					},
 					"body": {
-						"value": "@activity('Source REST API Call').output?.object",
+						"value": "@activity('Source REST API Call').output?.Response",
 						"type": "Expression"
 					}
 				}
