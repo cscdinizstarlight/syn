@@ -88,7 +88,8 @@
 									"path": "$['object']['middle_name']"
 								},
 								"sink": {
-									"name": "object_middle_name"
+									"name": "object_middle_name",
+									"type": "String"
 								}
 							},
 							{
@@ -589,14 +590,6 @@
 							},
 							{
 								"source": {
-									"path": "$['nice']['background_check_user'][0]"
-								},
-								"sink": {
-									"name": "nice_background_check_user']["
-								}
-							},
-							{
-								"source": {
 									"path": "$['nice']['given_names']"
 								},
 								"sink": {
@@ -665,6 +658,14 @@
 								},
 								"sink": {
 									"name": "duplicate_status"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nice']['background_check_user'][0]"
+								},
+								"sink": {
+									"name": "nice_background_check_user']["
 								}
 							},
 							{
