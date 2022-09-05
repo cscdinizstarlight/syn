@@ -132,6 +132,10 @@
 			"DataLakeSA": {
 				"type": "string",
 				"defaultValue": "?sv=2020-02-10&st=2022-09-05T01%3A04%3A58Z&se=2033-09-30T01%3A04%3A00Z&sr=c&sp=racwlm&sig=i6Oj5lIPY6SDjdcEGKGQnBD6fDB4BJc0KkHN2EzLztA%3D"
+			},
+			"EntityName": {
+				"type": "string",
+				"defaultValue": "user"
 			}
 		},
 		"folder": {
