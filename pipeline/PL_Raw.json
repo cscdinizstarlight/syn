@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat('https://stlanalyticskeyvault.vault.azure.net/secrets/', pipeline().parameters.KeyVault, '?api-version=7.0')",
+						"value": "@concat(pipeline().parameters.KeyVault, '?api-version=7.0')",
 						"type": "Expression"
 					},
 					"connectVia": {
