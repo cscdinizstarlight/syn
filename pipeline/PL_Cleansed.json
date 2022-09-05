@@ -39,20 +39,7 @@
 						}
 					},
 					"enableStaging": false,
-					"enableSkipIncompatibleRow": true,
-					"logSettings": {
-						"enableCopyActivityLog": true,
-						"copyActivityLogSettings": {
-							"logLevel": "Warning",
-							"enableReliableLogging": false
-						},
-						"logLocationSettings": {
-							"linkedServiceName": {
-								"referenceName": "datalake",
-								"type": "LinkedServiceReference"
-							}
-						}
-					},
+					"enableSkipIncompatibleRow": false,
 					"translator": {
 						"type": "TabularTranslator",
 						"mapComplexValuesToString": true
