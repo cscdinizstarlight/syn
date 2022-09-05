@@ -90,7 +90,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(pipeline().parameters.DataLakeURL, 'raw/',pipeline().parameters.SinkFolder, pipeline().parameters.DataLakeSA)",
+						"value": "@concat(pipeline().parameters.DataLakeURL, 'raw/',pipeline().parameters.SinkFolder,pipeline().TriggerId,'.json' ,pipeline().parameters.DataLakeSA)",
 						"type": "Expression"
 					},
 					"connectVia": {
