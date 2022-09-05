@@ -54,7 +54,7 @@
 					},
 					"translator": {
 						"type": "TabularTranslator",
-						"mapComplexValuesToString": false
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
