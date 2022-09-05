@@ -1073,10 +1073,12 @@
 		],
 		"parameters": {
 			"SinkFolder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Rosterfy/User/2022/09/05"
 			},
 			"FileName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "user_3d9b2584cbff48eeb15fa7cdad222343"
 			}
 		},
 		"folder": {
