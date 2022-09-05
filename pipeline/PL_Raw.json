@@ -111,13 +111,16 @@
 				"type": "string"
 			},
 			"KeyVault": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://stlanalyticskeyvault.vault.azure.net/secrets/RosterfyAccessToken"
 			},
 			"BaseUrl": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://getconnected.rosterfy.com.au/api/v2"
 			},
 			"Query": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "user"
 			},
 			"DataLakeURL": {
 				"type": "string"
