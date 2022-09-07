@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_Cleansed_CSV",
+						"referenceName": "DS_Raw_FilePath_Json",
 						"type": "DatasetReference"
 					},
 					"name": "JSONRaw"
@@ -14,43 +14,48 @@
 			],
 			"sinks": [
 				{
-					"linkedService": {
+					"dataset": {
+						"referenceName": "DS_Cleansed_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "sinkToCSV",
+					"rejectedDataLinkedService": {
 						"referenceName": "datalake",
 						"type": "LinkedServiceReference"
-					},
-					"name": "sinkToCSV"
+					}
 				}
 			],
 			"transformations": [
 				{
-					"name": "flatten1"
-				},
-				{
-					"name": "MapDrifted1",
-					"description": "Creates an explicit mapping for each drifted column"
+					"name": "mapJSONHierarchySubcolumns"
 				}
 			],
 			"scriptLines": [
-				"parameters{",
-				"     SinkFolder as string,",
-				"     FileName as string",
-				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> JSONRaw",
-				"MapDrifted1 foldDown(unroll(),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"JSONRaw derive(nice = toArray(byName('nice'))) ~> MapDrifted1",
-				"flatten1 sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine',",
+				"     backslashEscape: true) ~> JSONRaw",
+				"JSONRaw select(mapColumn(",
+				"          each(object,match(true()),",
+				"               'object_'+$$ = $$),",
+				"          each(nice,match(true()),",
+				"               'nice_'+$$ = $$),",
+				"          each(permissions,match(true()),",
+				"               'permissions_'+$$ = $$),",
+				"          each(attributes.employment_status,match(true()),",
+				"               'attributes_employment_status_'+$$ = $$),",
+				"          each(attributes.state,match(true()),",
+				"               'attributes_employment_state_'+$$ = $$),",
+				"          each(object.address,match(true()),",
+				"               'object_address_'+$$ = $$),",
+				"          each(object.address.coordinates,match(true()),",
+				"               'object_address_coordinates_'+$$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> mapJSONHierarchySubcolumns",
+				"mapJSONHierarchySubcolumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'delimited',",
-				"     fileSystem: 'cleansed',",
-				"     folderPath: ($SinkFolder),",
-				"     columnDelimiter: ',',",
-				"     escapeChar: '\\\\',",
-				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
