@@ -46,7 +46,21 @@
 						}
 					},
 					"enableStaging": false,
-					"enableSkipIncompatibleRow": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "datalake",
+								"type": "LinkedServiceReference"
+							},
+							"path": "copyactivity-logs/RawToCleansed"
+						}
+					},
 					"translator": {
 						"value": "@json(activity('GetColumnMapping').output.firstRow.json_output)\n",
 						"type": "Expression"
