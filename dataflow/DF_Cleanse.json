@@ -5,9 +5,9 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"linkedService": {
-						"referenceName": "datalake",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "DS_Cleansed_CSV",
+						"type": "DatasetReference"
 					},
 					"name": "JSONRaw"
 				}
@@ -26,7 +26,8 @@
 					"name": "flatten1"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
 				}
 			],
 			"scriptLines": [
@@ -36,17 +37,11 @@
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'json',",
-				"     fileSystem: 'raw',",
-				"     folderPath: ($SinkFolder),",
-				"     fileName: ($FileName),",
-				"     documentForm: 'arrayOfDocuments',",
-				"     backslashEscape: true) ~> JSONRaw",
-				"derivedColumn1 foldDown(unroll(),",
+				"     ignoreNoFilesFound: false) ~> JSONRaw",
+				"MapDrifted1 foldDown(unroll(),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"JSONRaw derive(object = split(replace(replace(replace(object, '[', ''),']',''),'},','}},'),'},')) ~> derivedColumn1",
+				"JSONRaw derive(nice = toArray(byName('nice'))) ~> MapDrifted1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'delimited',",
