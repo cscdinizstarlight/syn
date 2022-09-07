@@ -136,6 +136,14 @@
 			"EntityName": {
 				"type": "string",
 				"defaultValue": "event"
+			},
+			"PipelineId": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"PipelineId": {
+				"type": "String"
 			}
 		},
 		"folder": {
