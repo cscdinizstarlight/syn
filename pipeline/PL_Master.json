@@ -130,6 +130,16 @@
 					"dataflow": {
 						"referenceName": "DF_Cleanse",
 						"type": "DataFlowReference",
+						"parameters": {
+							"SinkFolder": {
+								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))}'",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.json')}'",
+								"type": "Expression"
+							}
+						},
 						"datasetParameters": {
 							"JSONRaw": {
 								"FolderPath": {
