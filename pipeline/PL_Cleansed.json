@@ -210,14 +210,6 @@
 							},
 							{
 								"source": {
-									"path": "$['object']['verify_email_token']"
-								},
-								"sink": {
-									"name": "verify_email_token"
-								}
-							},
-							{
-								"source": {
 									"path": "$['object']['login_lockout_attempts']"
 								},
 								"sink": {
