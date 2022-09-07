@@ -5,18 +5,18 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "DS_Raw_FilePath_Json",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
 					"name": "JSONRaw"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "DS_Cleansed_CSV",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
 					"name": "sinkToCSV",
 					"rejectedDataLinkedService": {
@@ -31,9 +31,17 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     SinkFolder as string,",
+				"     FileName as string",
+				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
+				"     format: 'json',",
+				"     fileSystem: 'raw',",
+				"     folderPath: ($SinkFolder),",
+				"     fileName: ($FileName),",
 				"     documentForm: 'documentPerLine',",
 				"     backslashEscape: true) ~> JSONRaw",
 				"JSONRaw select(mapColumn(",
@@ -56,6 +64,13 @@
 				"     skipDuplicateMapOutputs: true) ~> mapJSONHierarchySubcolumns",
 				"mapJSONHierarchySubcolumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'cleansed',",
+				"     folderPath: ($SinkFolder),",
+				"     columnDelimiter: ',',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: false,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
