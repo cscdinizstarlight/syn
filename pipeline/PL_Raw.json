@@ -111,7 +111,7 @@
 		"parameters": {
 			"SinkFolder": {
 				"type": "string",
-				"defaultValue": "Rosterfy/User"
+				"defaultValue": "Rosterfy/Event"
 			},
 			"KeyVault": {
 				"type": "string",
@@ -123,7 +123,7 @@
 			},
 			"Query": {
 				"type": "string",
-				"defaultValue": "user"
+				"defaultValue": "event"
 			},
 			"DataLakeURL": {
 				"type": "string",
@@ -135,7 +135,7 @@
 			},
 			"EntityName": {
 				"type": "string",
-				"defaultValue": "user"
+				"defaultValue": "event"
 			}
 		},
 		"folder": {

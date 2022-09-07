@@ -82,6 +82,36 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "Execute Pipeline2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Cleansed",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"SinkFolder": {
+							"value": "@activity('Get Pipeline Paramenter').output.SinkFolder",
+							"type": "Expression"
+						},
+						"EntityName": {
+							"value": "@activity('Get Pipeline Paramenter').output.EntityName",
+							"type": "Expression"
+						}
+					}
+				}
 			}
 		],
 		"folder": {
