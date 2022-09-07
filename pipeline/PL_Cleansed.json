@@ -202,38 +202,6 @@
 							},
 							{
 								"source": {
-									"path": "$['object']['email_verified']"
-								},
-								"sink": {
-									"name": "object_email_verified"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['login_lockout_attempts']"
-								},
-								"sink": {
-									"name": "login_lockout_attempts"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['login_lockout_at']"
-								},
-								"sink": {
-									"name": "login_lockout_at"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['login_lockout_email_sent_at']"
-								},
-								"sink": {
-									"name": "login_lockout_email_sent_at"
-								}
-							},
-							{
-								"source": {
 									"path": "$['object']['last_login_at']"
 								},
 								"sink": {
@@ -322,22 +290,6 @@
 							},
 							{
 								"source": {
-									"path": "$['object']['address']['coordinates']['latitude']"
-								},
-								"sink": {
-									"name": "object_address_coordinates_latitude"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['address']['coordinates']['longitude']"
-								},
-								"sink": {
-									"name": "object_address_coordinates_longitude"
-								}
-							},
-							{
-								"source": {
 									"path": "$['object']['address']['street_address_1']"
 								},
 								"sink": {
@@ -394,22 +346,6 @@
 							},
 							{
 								"source": {
-									"path": "$['object']['address']['latitude']"
-								},
-								"sink": {
-									"name": "object_address_latitude"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['address']['longitude']"
-								},
-								"sink": {
-									"name": "object_address_longitude"
-								}
-							},
-							{
-								"source": {
 									"path": "$['nice']['rrn']"
 								},
 								"sink": {
@@ -442,22 +378,6 @@
 							},
 							{
 								"source": {
-									"path": "$['nice']['interests:value']"
-								},
-								"sink": {
-									"name": "interests:value"
-								}
-							},
-							{
-								"source": {
-									"path": "$['nice']['interests:array']"
-								},
-								"sink": {
-									"name": "interests:array"
-								}
-							},
-							{
-								"source": {
 									"path": "$['nice']['is_subscribed']"
 								},
 								"sink": {
@@ -478,14 +398,6 @@
 								},
 								"sink": {
 									"name": "nice_last_name"
-								}
-							},
-							{
-								"source": {
-									"path": "$['nice']['middle_name']"
-								},
-								"sink": {
-									"name": "nice_middle_name"
 								}
 							},
 							{
@@ -654,134 +566,6 @@
 								},
 								"sink": {
 									"name": "updated_hours"
-								}
-							},
-							{
-								"source": {
-									"path": "$['nice']['login_locked']"
-								},
-								"sink": {
-									"name": "login_locked"
-								}
-							},
-							{
-								"source": {
-									"path": "$['nice']['duplicate_status']"
-								},
-								"sink": {
-									"name": "duplicate_status"
-								}
-							},
-							{
-								"source": {
-									"path": "$['relations'][0]"
-								},
-								"sink": {
-									"name": "relations']["
-								}
-							},
-							{
-								"source": {
-									"path": "$['permissions']['read']"
-								},
-								"sink": {
-									"name": "read"
-								}
-							},
-							{
-								"source": {
-									"path": "$['permissions']['update']"
-								},
-								"sink": {
-									"name": "update"
-								}
-							},
-							{
-								"source": {
-									"path": "$['permissions']['delete']"
-								},
-								"sink": {
-									"name": "delete"
-								}
-							},
-							{
-								"source": {
-									"path": "$['permissions']['impersonate']"
-								},
-								"sink": {
-									"name": "impersonate"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['interests']['name']"
-								},
-								"sink": {
-									"name": "attributes_interests_name"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['interests']['label']"
-								},
-								"sink": {
-									"name": "attributes_interests_label"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['interests']['type']"
-								},
-								"sink": {
-									"name": "attributes_interests_type"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['employment_status']['name']"
-								},
-								"sink": {
-									"name": "attributes_employment_status_name"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['employment_status']['label']"
-								},
-								"sink": {
-									"name": "attributes_employment_status_label"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['employment_status']['type']"
-								},
-								"sink": {
-									"name": "attributes_employment_status_type"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['state']['name']"
-								},
-								"sink": {
-									"name": "attributes_state_name"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['state']['label']"
-								},
-								"sink": {
-									"name": "attributes_state_label"
-								}
-							},
-							{
-								"source": {
-									"path": "$['attributes']['state']['type']"
-								},
-								"sink": {
-									"name": "attributes_state_type"
 								}
 							}
 						],
