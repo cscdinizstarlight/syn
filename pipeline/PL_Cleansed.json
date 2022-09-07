@@ -76,7 +76,7 @@
 								"type": "Expression"
 							},
 							"FileName": {
-								"value": "@concat(pipeline().parameters.EntityName, '_',pipeline().TriggerId,'.json')",
+								"value": "@concat(pipeline().parameters.EntityName, '_',pipeline().parameters.PipelineId,'.json')",
 								"type": "Expression"
 							}
 						}
@@ -92,7 +92,7 @@
 								"type": "Expression"
 							},
 							"SinkFileName": {
-								"value": "@concat(pipeline().parameters.EntityName, '_',pipeline().TriggerId,'.csv')",
+								"value": "@concat(pipeline().parameters.EntityName, '_',pipeline().parameters.PipelineId,'.csv')",
 								"type": "Expression"
 							}
 						}
@@ -139,6 +139,14 @@
 			"EntityName": {
 				"type": "string",
 				"defaultValue": "user_3d9b2584cbff48eeb15fa7cdad222343"
+			},
+			"PipelineId": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"PipelineId": {
+				"type": "String"
 			}
 		},
 		"folder": {
