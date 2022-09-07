@@ -29,7 +29,8 @@
 				"fileSystem": "cleansed"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\"",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
 			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
