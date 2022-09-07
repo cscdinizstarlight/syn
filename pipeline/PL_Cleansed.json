@@ -72,7 +72,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderPath": {
-								"value": "@concat('raw/',pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
+								"value": "@concat(pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
 								"type": "Expression"
 							},
 							"FileName": {
@@ -88,7 +88,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SinkFolder": {
-								"value": "@concat('cleansed/',pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
+								"value": "@concat(pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
 								"type": "Expression"
 							},
 							"SinkFileName": {
