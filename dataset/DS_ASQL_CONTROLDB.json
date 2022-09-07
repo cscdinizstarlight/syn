@@ -1,0 +1,12 @@
+{
+	"name": "DS_ASQL_CONTROLDB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ASQL_CONTROL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

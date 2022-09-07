@@ -87,7 +87,7 @@
 			},
 			{
 				"name": "GetColumnMapping",
-				"type": "GetMetadata",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -98,11 +98,22 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "DS_ASQL_CONTROL",
-						"type": "DatasetReference"
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[spGetQueryColumnMapping]",
+						"storedProcedureParameters": {
+							"queryId": {
+								"type": "String",
+								"value": "1"
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
-					"fieldList": []
+					"dataset": {
+						"referenceName": "DS_ASQL_CONTROLDB",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
