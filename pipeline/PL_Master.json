@@ -34,7 +34,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline1",
+				"name": "PL_Raw",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -84,11 +84,11 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline2",
+				"name": "PL_Cleansed",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "Execute Pipeline1",
+						"activity": "PL_Raw",
 						"dependencyConditions": [
 							"Succeeded"
 						]
