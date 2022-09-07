@@ -88,7 +88,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"SinkFolder": {
-								"value": "@concat(pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
+								"value": "@pipeline().parameters.SinkFolder\n",
 								"type": "Expression"
 							},
 							"SinkFileName": {
