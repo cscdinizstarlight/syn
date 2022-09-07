@@ -62,8 +62,8 @@
 						}
 					},
 					"translator": {
-						"value": "@json(activity('GetColumnMapping').output.firstRow.json_output)\n",
-						"type": "Expression"
+						"type": "TabularTranslator",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
@@ -72,7 +72,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"FolderPath": {
-								"value": "@concat(pipeline().parameters.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))\n",
+								"value": "@pipeline().parameters.SinkFolder\n",
 								"type": "Expression"
 							},
 							"FileName": {
@@ -134,19 +134,15 @@
 		"parameters": {
 			"SinkFolder": {
 				"type": "string",
-				"defaultValue": "Rosterfy/User/2022/09/05"
+				"defaultValue": "Rosterfy/User/2022/09/07"
 			},
 			"EntityName": {
 				"type": "string",
-				"defaultValue": "user_3d9b2584cbff48eeb15fa7cdad222343"
+				"defaultValue": "user"
 			},
 			"PipelineId": {
-				"type": "string"
-			}
-		},
-		"variables": {
-			"PipelineId": {
-				"type": "String"
+				"type": "string",
+				"defaultValue": "019127b7a976429297065217050bec84"
 			}
 		},
 		"folder": {
