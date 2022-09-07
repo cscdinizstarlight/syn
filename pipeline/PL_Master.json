@@ -53,31 +53,31 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"SinkFolder": {
-							"value": "@activity('Get Pipeline Paramenter').output.SinkFolder",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.SinkFolder",
 							"type": "Expression"
 						},
 						"KeyVault": {
-							"value": "@activity('Get Pipeline Paramenter').output.KeyVaultUrl",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.KeyVaultUrl",
 							"type": "Expression"
 						},
 						"BaseUrl": {
-							"value": "@activity('Get Pipeline Paramenter').output.BaseUrl",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.BaseUrl",
 							"type": "Expression"
 						},
 						"Query": {
-							"value": "@activity('Get Pipeline Paramenter').output.Query",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.Query",
 							"type": "Expression"
 						},
 						"DataLakeURL": {
-							"value": "@activity('Get Pipeline Paramenter').output.DataLakeUrl",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.DataLakeUrl",
 							"type": "Expression"
 						},
 						"DataLakeSA": {
-							"value": "@activity('Get Pipeline Paramenter').output.DataLakeUrlQuery",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.DataLakeUrlQuery",
 							"type": "Expression"
 						},
 						"EntityName": {
-							"value": "@activity('Get Pipeline Paramenter').output.EntityName",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.EntityName",
 							"type": "Expression"
 						}
 					}
@@ -103,11 +103,11 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"SinkFolder": {
-							"value": "@activity('Get Pipeline Paramenter').output.SinkFolder",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.SinkFolder",
 							"type": "Expression"
 						},
 						"EntityName": {
-							"value": "@activity('Get Pipeline Paramenter').output.EntityName",
+							"value": "@activity('Get Pipeline Paramenter').output.firstRow.EntityName",
 							"type": "Expression"
 						}
 					}
