@@ -68,6 +68,14 @@
 							"value": "@activity('Get Pipeline Paramenter').output.Query",
 							"type": "Expression"
 						},
+						"DataLakeURL": {
+							"value": "@activity('Get Pipeline Paramenter').output.DataLakeUrl",
+							"type": "Expression"
+						},
+						"DataLakeSA": {
+							"value": "@activity('Get Pipeline Paramenter').output.DataLakeUrlQuery",
+							"type": "Expression"
+						},
 						"EntityName": {
 							"value": "@activity('Get Pipeline Paramenter').output.EntityName",
 							"type": "Expression"
