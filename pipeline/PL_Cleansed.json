@@ -47,8 +47,8 @@
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": false,
 					"translator": {
-						"type": "TabularTranslator",
-						"mapComplexValuesToString": false
+						"value": "@json(activity('GetColumnMapping').output.firstRow.json_output)\n",
+						"type": "Expression"
 					}
 				},
 				"inputs": [
