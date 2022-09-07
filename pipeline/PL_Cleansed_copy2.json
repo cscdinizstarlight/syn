@@ -1,0 +1,148 @@
+{
+	"name": "PL_Cleansed_copy2",
+	"properties": {
+		"activities": [
+			{
+				"name": "RawToCleansed",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "GetColumnMapping",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Info",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "datalake",
+								"type": "LinkedServiceReference"
+							},
+							"path": "copyactivity-logs/RawToCleansed"
+						}
+					},
+					"translator": {
+						"value": "@json(activity('GetColumnMapping').output.firstRow.json_output)\n",
+						"type": "Expression"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Raw_FilePath_Json",
+						"type": "DatasetReference",
+						"parameters": {
+							"FolderPath": {
+								"value": "@pipeline().parameters.SinkFolder",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@concat(pipeline().parameters.FileName, '.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parquet1",
+						"type": "DatasetReference",
+						"parameters": {
+							"a": {
+								"value": "@pipeline().parameters.SinkFolder",
+								"type": "Expression"
+							},
+							"b": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "GetColumnMapping",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[spGetQueryColumnMapping]",
+						"storedProcedureParameters": {
+							"queryId": {
+								"type": "String",
+								"value": "1"
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_ASQL_CONTROLDB",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"SinkFolder": {
+				"type": "string",
+				"defaultValue": "Rosterfy/User/2022/09/05"
+			},
+			"FileName": {
+				"type": "string",
+				"defaultValue": "user_3d9b2584cbff48eeb15fa7cdad222343"
+			}
+		},
+		"folder": {
+			"name": "Metadata-driven Pipeline"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-08-26T05:41:32Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
