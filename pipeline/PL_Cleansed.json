@@ -69,7 +69,8 @@
 									"path": "$['object']['id']"
 								},
 								"sink": {
-									"name": "id"
+									"name": "id",
+									"type": "String"
 								}
 							},
 							{
@@ -77,7 +78,8 @@
 									"path": "$['object']['id_token']"
 								},
 								"sink": {
-									"name": "id_token"
+									"name": "id_token",
+									"type": "String"
 								}
 							},
 							{
@@ -85,7 +87,8 @@
 									"path": "$['object']['account_id']"
 								},
 								"sink": {
-									"name": "account_id"
+									"name": "account_id",
+									"type": "String"
 								}
 							},
 							{
@@ -93,7 +96,8 @@
 									"path": "$['object']['email']"
 								},
 								"sink": {
-									"name": "email"
+									"name": "email",
+									"type": "String"
 								}
 							},
 							{
@@ -101,7 +105,8 @@
 									"path": "$['object']['first_name']"
 								},
 								"sink": {
-									"name": "object_first_name"
+									"name": "object_first_name",
+									"type": "String"
 								}
 							},
 							{
@@ -109,7 +114,8 @@
 									"path": "$['object']['last_name']"
 								},
 								"sink": {
-									"name": "object_last_name"
+									"name": "object_last_name",
+									"type": "String"
 								}
 							},
 							{
@@ -117,7 +123,8 @@
 									"path": "$['object']['preferred_name']"
 								},
 								"sink": {
-									"name": "object_preferred_name"
+									"name": "object_preferred_name",
+									"type": "String"
 								}
 							},
 							{
@@ -125,7 +132,8 @@
 									"path": "$['object']['phone']"
 								},
 								"sink": {
-									"name": "object_phone"
+									"name": "object_phone",
+									"type": "String"
 								}
 							},
 							{
@@ -133,7 +141,8 @@
 									"path": "$['object']['dob']"
 								},
 								"sink": {
-									"name": "dob"
+									"name": "dob",
+									"type": "String"
 								}
 							},
 							{
@@ -141,7 +150,8 @@
 									"path": "$['object']['picture']"
 								},
 								"sink": {
-									"name": "picture"
+									"name": "picture",
+									"type": "String"
 								}
 							},
 							{
@@ -149,7 +159,8 @@
 									"path": "$['object']['picture_status']"
 								},
 								"sink": {
-									"name": "object_picture_status"
+									"name": "object_picture_status",
+									"type": "String"
 								}
 							},
 							{
@@ -157,7 +168,8 @@
 									"path": "$['object']['is_subscribed']"
 								},
 								"sink": {
-									"name": "object_is_subscribed"
+									"name": "object_is_subscribed",
+									"type": "String"
 								}
 							},
 							{
@@ -165,7 +177,8 @@
 									"path": "$['object']['is_unreachable']"
 								},
 								"sink": {
-									"name": "is_unreachable"
+									"name": "is_unreachable",
+									"type": "String"
 								}
 							},
 							{
@@ -173,7 +186,8 @@
 									"path": "$['object']['terms']"
 								},
 								"sink": {
-									"name": "object_terms"
+									"name": "object_terms",
+									"type": "String"
 								}
 							},
 							{
@@ -181,7 +195,8 @@
 									"path": "$['object']['rating']"
 								},
 								"sink": {
-									"name": "rating"
+									"name": "rating",
+									"type": "String"
 								}
 							},
 							{
@@ -189,7 +204,8 @@
 									"path": "$['object']['shift_privacy']"
 								},
 								"sink": {
-									"name": "object_shift_privacy"
+									"name": "object_shift_privacy",
+									"type": "String"
 								}
 							},
 							{
@@ -197,7 +213,8 @@
 									"path": "$['object']['is_team_leader']"
 								},
 								"sink": {
-									"name": "object_is_team_leader"
+									"name": "object_is_team_leader",
+									"type": "String"
 								}
 							},
 							{
@@ -205,15 +222,8 @@
 									"path": "$['object']['last_login_at']"
 								},
 								"sink": {
-									"name": "last_login_at"
-								}
-							},
-							{
-								"source": {
-									"path": "$['object']['delete_requested_at']"
-								},
-								"sink": {
-									"name": "delete_requested_at"
+									"name": "last_login_at",
+									"type": "String"
 								}
 							},
 							{
@@ -221,7 +231,8 @@
 									"path": "$['object']['deleted_at']"
 								},
 								"sink": {
-									"name": "deleted_at"
+									"name": "deleted_at",
+									"type": "String"
 								}
 							},
 							{
@@ -229,7 +240,8 @@
 									"path": "$['object']['created_at']"
 								},
 								"sink": {
-									"name": "created_at"
+									"name": "created_at",
+									"type": "String"
 								}
 							},
 							{
@@ -237,7 +249,8 @@
 									"path": "$['object']['updated_at']"
 								},
 								"sink": {
-									"name": "updated_at"
+									"name": "updated_at",
+									"type": "String"
 								}
 							},
 							{
@@ -245,7 +258,8 @@
 									"path": "$['object']['deleted_by']"
 								},
 								"sink": {
-									"name": "deleted_by"
+									"name": "deleted_by",
+									"type": "String"
 								}
 							},
 							{
@@ -253,7 +267,8 @@
 									"path": "$['object']['team_member_id']"
 								},
 								"sink": {
-									"name": "object_team_member_id"
+									"name": "object_team_member_id",
+									"type": "String"
 								}
 							},
 							{
@@ -261,7 +276,8 @@
 									"path": "$['object']['state']"
 								},
 								"sink": {
-									"name": "object_state"
+									"name": "object_state",
+									"type": "String"
 								}
 							},
 							{
@@ -269,7 +285,8 @@
 									"path": "$['object']['employment_status']"
 								},
 								"sink": {
-									"name": "object_employment_status"
+									"name": "object_employment_status",
+									"type": "String"
 								}
 							},
 							{
@@ -277,7 +294,8 @@
 									"path": "$['object']['interests']"
 								},
 								"sink": {
-									"name": "object_interests"
+									"name": "object_interests",
+									"type": "String"
 								}
 							},
 							{
@@ -285,7 +303,8 @@
 									"path": "$['object']['address']['iso']"
 								},
 								"sink": {
-									"name": "iso"
+									"name": "iso",
+									"type": "String"
 								}
 							},
 							{
@@ -293,7 +312,8 @@
 									"path": "$['object']['address']['street_address_1']"
 								},
 								"sink": {
-									"name": "street_address_1"
+									"name": "street_address_1",
+									"type": "String"
 								}
 							},
 							{
@@ -301,7 +321,8 @@
 									"path": "$['object']['address']['street_address_2']"
 								},
 								"sink": {
-									"name": "street_address_2"
+									"name": "street_address_2",
+									"type": "String"
 								}
 							},
 							{
@@ -309,7 +330,8 @@
 									"path": "$['object']['address']['street_address_3']"
 								},
 								"sink": {
-									"name": "street_address_3"
+									"name": "street_address_3",
+									"type": "String"
 								}
 							},
 							{
@@ -317,7 +339,8 @@
 									"path": "$['object']['address']['city']"
 								},
 								"sink": {
-									"name": "city"
+									"name": "city",
+									"type": "String"
 								}
 							},
 							{
@@ -325,7 +348,8 @@
 									"path": "$['object']['address']['postcode']"
 								},
 								"sink": {
-									"name": "postcode"
+									"name": "postcode",
+									"type": "String"
 								}
 							},
 							{
@@ -333,7 +357,8 @@
 									"path": "$['object']['address']['region']"
 								},
 								"sink": {
-									"name": "region"
+									"name": "region",
+									"type": "String"
 								}
 							},
 							{
@@ -341,7 +366,8 @@
 									"path": "$['object']['address']['country']"
 								},
 								"sink": {
-									"name": "country"
+									"name": "country",
+									"type": "String"
 								}
 							},
 							{
@@ -349,7 +375,8 @@
 									"path": "$['nice']['rrn']"
 								},
 								"sink": {
-									"name": "rrn"
+									"name": "rrn",
+									"type": "String"
 								}
 							},
 							{
@@ -357,7 +384,8 @@
 									"path": "$['nice']['email_verified']"
 								},
 								"sink": {
-									"name": "nice_email_verified"
+									"name": "nice_email_verified",
+									"type": "String"
 								}
 							},
 							{
@@ -365,7 +393,8 @@
 									"path": "$['nice']['first_name']"
 								},
 								"sink": {
-									"name": "nice_first_name"
+									"name": "nice_first_name",
+									"type": "String"
 								}
 							},
 							{
@@ -373,7 +402,8 @@
 									"path": "$['nice']['interests']"
 								},
 								"sink": {
-									"name": "nice_interests"
+									"name": "nice_interests",
+									"type": "String"
 								}
 							},
 							{
@@ -381,7 +411,8 @@
 									"path": "$['nice']['is_subscribed']"
 								},
 								"sink": {
-									"name": "nice_is_subscribed"
+									"name": "nice_is_subscribed",
+									"type": "String"
 								}
 							},
 							{
@@ -389,7 +420,8 @@
 									"path": "$['nice']['is_team_leader']"
 								},
 								"sink": {
-									"name": "nice_is_team_leader"
+									"name": "nice_is_team_leader",
+									"type": "String"
 								}
 							},
 							{
@@ -397,7 +429,8 @@
 									"path": "$['nice']['last_name']"
 								},
 								"sink": {
-									"name": "nice_last_name"
+									"name": "nice_last_name",
+									"type": "String"
 								}
 							},
 							{
@@ -405,7 +438,8 @@
 									"path": "$['nice']['phone']"
 								},
 								"sink": {
-									"name": "nice_phone"
+									"name": "nice_phone",
+									"type": "String"
 								}
 							},
 							{
@@ -413,7 +447,8 @@
 									"path": "$['nice']['phone:raw']"
 								},
 								"sink": {
-									"name": "phone:raw"
+									"name": "phone:raw",
+									"type": "String"
 								}
 							},
 							{
@@ -421,7 +456,8 @@
 									"path": "$['nice']['preferred_name']"
 								},
 								"sink": {
-									"name": "nice_preferred_name"
+									"name": "nice_preferred_name",
+									"type": "String"
 								}
 							},
 							{
@@ -429,7 +465,8 @@
 									"path": "$['nice']['shift_privacy']"
 								},
 								"sink": {
-									"name": "nice_shift_privacy"
+									"name": "nice_shift_privacy",
+									"type": "String"
 								}
 							},
 							{
@@ -437,7 +474,8 @@
 									"path": "$['nice']['terms']"
 								},
 								"sink": {
-									"name": "nice_terms"
+									"name": "nice_terms",
+									"type": "String"
 								}
 							},
 							{
@@ -445,7 +483,8 @@
 									"path": "$['nice']['employment_status']"
 								},
 								"sink": {
-									"name": "nice_employment_status"
+									"name": "nice_employment_status",
+									"type": "String"
 								}
 							},
 							{
@@ -453,7 +492,8 @@
 									"path": "$['nice']['state']"
 								},
 								"sink": {
-									"name": "nice_state"
+									"name": "nice_state",
+									"type": "String"
 								}
 							},
 							{
@@ -461,7 +501,8 @@
 									"path": "$['nice']['team_member_id']"
 								},
 								"sink": {
-									"name": "nice_team_member_id"
+									"name": "nice_team_member_id",
+									"type": "String"
 								}
 							},
 							{
@@ -469,7 +510,8 @@
 									"path": "$['nice']['name']"
 								},
 								"sink": {
-									"name": "nice_name"
+									"name": "nice_name",
+									"type": "String"
 								}
 							},
 							{
@@ -477,7 +519,8 @@
 									"path": "$['nice']['age']"
 								},
 								"sink": {
-									"name": "age"
+									"name": "age",
+									"type": "String"
 								}
 							},
 							{
@@ -485,7 +528,8 @@
 									"path": "$['nice']['address']"
 								},
 								"sink": {
-									"name": "address"
+									"name": "address",
+									"type": "String"
 								}
 							},
 							{
@@ -493,7 +537,8 @@
 									"path": "$['nice']['address_oneline']"
 								},
 								"sink": {
-									"name": "address_oneline"
+									"name": "address_oneline",
+									"type": "String"
 								}
 							},
 							{
@@ -501,7 +546,8 @@
 									"path": "$['nice']['info']"
 								},
 								"sink": {
-									"name": "info"
+									"name": "info",
+									"type": "String"
 								}
 							},
 							{
@@ -509,7 +555,8 @@
 									"path": "$['nice']['background_check_user'][0]"
 								},
 								"sink": {
-									"name": "nice_background_check_user']["
+									"name": "nice_background_check_user'][",
+									"type": "String"
 								}
 							},
 							{
@@ -517,7 +564,8 @@
 									"path": "$['nice']['given_names']"
 								},
 								"sink": {
-									"name": "given_names"
+									"name": "given_names",
+									"type": "String"
 								}
 							},
 							{
@@ -525,7 +573,8 @@
 									"path": "$['nice']['preferred_first_name']"
 								},
 								"sink": {
-									"name": "preferred_first_name"
+									"name": "preferred_first_name",
+									"type": "String"
 								}
 							},
 							{
@@ -533,7 +582,8 @@
 									"path": "$['nice']['available_by_default']"
 								},
 								"sink": {
-									"name": "available_by_default"
+									"name": "available_by_default",
+									"type": "String"
 								}
 							},
 							{
@@ -541,7 +591,8 @@
 									"path": "$['nice']['google2fa_enabled']"
 								},
 								"sink": {
-									"name": "google2fa_enabled"
+									"name": "google2fa_enabled",
+									"type": "String"
 								}
 							},
 							{
@@ -549,7 +600,8 @@
 									"path": "$['nice']['picture_status']"
 								},
 								"sink": {
-									"name": "nice_picture_status"
+									"name": "nice_picture_status",
+									"type": "String"
 								}
 							},
 							{
@@ -557,7 +609,8 @@
 									"path": "$['nice']['delete_requested']"
 								},
 								"sink": {
-									"name": "delete_requested"
+									"name": "delete_requested",
+									"type": "String"
 								}
 							},
 							{
@@ -565,7 +618,8 @@
 									"path": "$['nice']['updated_hours']"
 								},
 								"sink": {
-									"name": "updated_hours"
+									"name": "updated_hours",
+									"type": "String"
 								}
 							}
 						],
