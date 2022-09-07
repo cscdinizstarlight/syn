@@ -106,14 +106,6 @@
 							},
 							{
 								"source": {
-									"path": "$['object']['middle_name']"
-								},
-								"sink": {
-									"name": "object_middle_name"
-								}
-							},
-							{
-								"source": {
 									"path": "$['object']['last_name']"
 								},
 								"sink": {
