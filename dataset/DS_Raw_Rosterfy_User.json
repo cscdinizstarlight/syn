@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "Rosterfy/User/Staging",
+				"fileName": "User_019127b7a976429297065217050bec84.json",
+				"folderPath": "Rosterfy/User/2022/09/07",
 				"fileSystem": "raw"
 			}
 		},
