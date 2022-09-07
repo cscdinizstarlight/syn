@@ -32,6 +32,48 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Get Pipeline Paramenter",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Raw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"SinkFolder": {
+							"value": "@activity('Get Pipeline Paramenter').output.SinkFolder",
+							"type": "Expression"
+						},
+						"KeyVault": {
+							"value": "@activity('Get Pipeline Paramenter').output.KeyVaultUrl",
+							"type": "Expression"
+						},
+						"BaseUrl": {
+							"value": "@activity('Get Pipeline Paramenter').output.BaseUrl",
+							"type": "Expression"
+						},
+						"Query": {
+							"value": "@activity('Get Pipeline Paramenter').output.Query",
+							"type": "Expression"
+						},
+						"EntityName": {
+							"value": "@activity('Get Pipeline Paramenter').output.EntityName",
+							"type": "Expression"
+						}
+					}
+				}
 			}
 		],
 		"folder": {
