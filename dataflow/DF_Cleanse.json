@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "flatten1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -40,9 +43,10 @@
 				"     fileName: ($FileName),",
 				"     documentForm: 'arrayOfDocuments',",
 				"     backslashEscape: true) ~> JSONRaw",
-				"JSONRaw foldDown(unroll(),",
+				"derivedColumn1 foldDown(unroll(),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"JSONRaw derive(object = split(replace(replace(replace(object, '[', ''),']',''),'},','}},'),'},')) ~> derivedColumn1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'delimited',",
