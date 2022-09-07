@@ -5,7 +5,14 @@
 			{
 				"name": "Get Pipeline Paramenter",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PiplelineId",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -79,6 +86,10 @@
 						"EntityName": {
 							"value": "@activity('Get Pipeline Paramenter').output.firstRow.EntityName",
 							"type": "Expression"
+						},
+						"PipelineId": {
+							"value": "@variables('PipelineId')",
+							"type": "Expression"
 						}
 					}
 				}
@@ -109,11 +120,33 @@
 						"EntityName": {
 							"value": "@activity('Get Pipeline Paramenter').output.firstRow.EntityName",
 							"type": "Expression"
+						},
+						"PipelineId": {
+							"value": "@variables('PipelineId')",
+							"type": "Expression"
 						}
+					}
+				}
+			},
+			{
+				"name": "PiplelineId",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "PipelineId",
+					"value": {
+						"value": "@pipeline().TriggerId",
+						"type": "Expression"
 					}
 				}
 			}
 		],
+		"variables": {
+			"PipelineId": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "Metadata-driven Pipeline"
 		},
