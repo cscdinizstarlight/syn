@@ -95,40 +95,6 @@
 				}
 			},
 			{
-				"name": "PL_Cleansed",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_Raw",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_Cleansed",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"SinkFolder": {
-							"value": "@activity('Get Pipeline Paramenter').output.firstRow.SinkFolder",
-							"type": "Expression"
-						},
-						"EntityName": {
-							"value": "@activity('Get Pipeline Paramenter').output.firstRow.EntityName",
-							"type": "Expression"
-						},
-						"PipelineId": {
-							"value": "@variables('PipelineId')",
-							"type": "Expression"
-						}
-					}
-				}
-			},
-			{
 				"name": "PiplelineId",
 				"type": "SetVariable",
 				"dependsOn": [],
@@ -139,6 +105,49 @@
 						"value": "@pipeline().TriggerId",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "PL_Raw",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_Cleanse",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"JSONRaw": {
+								"FolderPath": {
+									"value": "@concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))",
+									"type": "Expression"
+								},
+								"FileName": {
+									"value": "@concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.json')",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
