@@ -23,7 +23,7 @@
 			],
 			"transformations": [
 				{
-					"name": "mapJSONHierarchySubcolumns"
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
@@ -38,11 +38,12 @@
 				"     fileSystem: 'raw',",
 				"     folderPath: ($SinkFolder),",
 				"     fileName: ($FileName),",
-				"     documentForm: 'documentPerLine',",
+				"     documentForm: 'arrayOfDocuments',",
 				"     backslashEscape: true) ~> JSONRaw",
-				"JSONRaw select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> mapJSONHierarchySubcolumns",
-				"JSONRaw sink(allowSchemaDrift: true,",
+				"JSONRaw foldDown(unroll(),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'delimited',",
 				"     fileSystem: 'cleansed',",
