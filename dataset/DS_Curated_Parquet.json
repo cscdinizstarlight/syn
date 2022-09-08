@@ -18,6 +18,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().SinkFolder",
+					"type": "Expression"
+				},
 				"fileSystem": "curated"
 			},
 			"compressionCodec": "snappy"
