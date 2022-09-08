@@ -32,9 +32,6 @@
 					"name": "AddSurrogateKey"
 				},
 				{
-					"name": "seedSurrogateKey"
-				},
-				{
 					"name": "addDateColumn"
 				}
 			],
@@ -62,9 +59,8 @@
 				"addDateColumn keyGenerate(output(SurrogateKey as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> AddSurrogateKey",
-				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
 				"addRowHash derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
-				"seedSurrogateKey sink(allowSchemaDrift: true,",
+				"AddSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     input(",
 				"          object_id as string,",
