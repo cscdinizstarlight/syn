@@ -63,6 +63,7 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
+				"     nullValue: '-',",
 				"     columnNamesAsHeader: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
