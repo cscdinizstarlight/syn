@@ -1,0 +1,172 @@
+{
+	"name": "DS_Curated_Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SinkFolder": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "curated"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "object_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "event_shift_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "post_shift_feedback_form_completed_at",
+				"type": "UTF8"
+			},
+			{
+				"name": "precheckin_form_completed_at",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_event_shift_status_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_start_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_end_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_deleted_at",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_created_at",
+				"type": "UTF8"
+			},
+			{
+				"name": "object_updated_at",
+				"type": "UTF8"
+			},
+			{
+				"name": "nice_end_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "end_timestamp__date",
+				"type": "UTF8"
+			},
+			{
+				"name": "end_timestamp__time",
+				"type": "UTF8"
+			},
+			{
+				"name": "end_timestamp__offset",
+				"type": "UTF8"
+			},
+			{
+				"name": "nice_event_shift_status_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "nice_is_leader",
+				"type": "UTF8"
+			},
+			{
+				"name": "nice_start_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "start_timestamp__date",
+				"type": "UTF8"
+			},
+			{
+				"name": "start_timestamp__time",
+				"type": "UTF8"
+			},
+			{
+				"name": "start_timestamp__offset",
+				"type": "UTF8"
+			},
+			{
+				"name": "attended_seconds",
+				"type": "UTF8"
+			},
+			{
+				"name": "attended_minutes",
+				"type": "UTF8"
+			},
+			{
+				"name": "attended_hours",
+				"type": "UTF8"
+			},
+			{
+				"name": "attended_pretty",
+				"type": "UTF8"
+			},
+			{
+				"name": "event_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "event_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_event_leader",
+				"type": "UTF8"
+			},
+			{
+				"name": "shift_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "shift_start_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "shift_end_timestamp",
+				"type": "UTF8"
+			},
+			{
+				"name": "shift_timezone",
+				"type": "UTF8"
+			},
+			{
+				"name": "requires_pre_checkin",
+				"type": "UTF8"
+			},
+			{
+				"name": "has_shift_attended_form",
+				"type": "UTF8"
+			},
+			{
+				"name": "has_checkin_form",
+				"type": "UTF8"
+			},
+			{
+				"name": "has_checkout_form",
+				"type": "UTF8"
+			}
+		]
+	}
+}
