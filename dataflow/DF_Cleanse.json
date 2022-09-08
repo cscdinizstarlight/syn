@@ -60,7 +60,7 @@
 				"     format: 'delimited',",
 				"     fileSystem: 'cleansed',",
 				"     folderPath: ($SinkFolder),",
-				"     columnDelimiter: ',',",
+				"     columnDelimiter: '|',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     nullValue: '-',",
