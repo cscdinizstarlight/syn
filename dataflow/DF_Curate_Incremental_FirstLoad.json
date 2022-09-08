@@ -1,0 +1,116 @@
+{
+	"name": "DF_Curate_Incremental_FirstLoad",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "todayCleansedData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curated_Parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sinkIncrementalData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectCuratedColumns"
+				},
+				{
+					"name": "addRowHash"
+				},
+				{
+					"name": "AddSurrogateKey"
+				},
+				{
+					"name": "seedSurrogateKey"
+				},
+				{
+					"name": "addDateColumn"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01')),",
+				"     SinkFolder as string ('Rosterfy/Event/2022/09/08'),",
+				"     FileName as string ('part-00000-066421f7-032a-4fdc-b79c-8b505ad6b23f-c000.csv'),",
+				"     SynapseExternalTable as string ('rfy.vwRosterfyEvent')",
+				"}",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'cleansed',",
+				"     folderPath: ($SinkFolder),",
+				"     fileName: ($FileName),",
+				"     columnDelimiter: ',',",
+				"     escapeChar: '\\\"',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> todayCleansedData",
+				"todayCleansedData select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",
+				"selectCuratedColumns derive(rowHash = sha2(256, columns())) ~> addRowHash",
+				"addDateColumn keyGenerate(output(SurrogateKey as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> AddSurrogateKey",
+				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
+				"addRowHash derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
+				"seedSurrogateKey sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     input(",
+				"          object_id as string,",
+				"          event_shift_id as string,",
+				"          user_id as string,",
+				"          post_shift_feedback_form_completed_at as string,",
+				"          precheckin_form_completed_at as string,",
+				"          object_event_shift_status_id as string,",
+				"          object_start_timestamp as string,",
+				"          object_end_timestamp as string,",
+				"          object_deleted_at as string,",
+				"          object_created_at as string,",
+				"          object_updated_at as string,",
+				"          nice_end_timestamp as string,",
+				"          end_timestamp__date as string,",
+				"          end_timestamp__time as string,",
+				"          end_timestamp__offset as string,",
+				"          nice_event_shift_status_id as string,",
+				"          nice_is_leader as string,",
+				"          nice_start_timestamp as string,",
+				"          start_timestamp__date as string,",
+				"          start_timestamp__time as string,",
+				"          start_timestamp__offset as string,",
+				"          attended_seconds as string,",
+				"          attended_minutes as string,",
+				"          attended_hours as string,",
+				"          attended_pretty as string,",
+				"          event_id as string,",
+				"          event_name as string,",
+				"          is_event_leader as string,",
+				"          shift_name as string,",
+				"          shift_start_timestamp as string,",
+				"          shift_end_timestamp as string,",
+				"          shift_timezone as string,",
+				"          requires_pre_checkin as string,",
+				"          has_shift_attended_form as string,",
+				"          has_checkin_form as string,",
+				"          has_checkout_form as string",
+				"     ),",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData"
+			]
+		}
+	}
+}
