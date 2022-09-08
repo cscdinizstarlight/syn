@@ -31,6 +31,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -51,12 +54,14 @@
 				"     documentForm: 'documentPerLine',",
 				"     backslashEscape: true) ~> JSONRaw",
 				"JSONRaw select(mapColumn(",
-				"          each(match(1==1),",
+				"          each(nice,match(1==1),",
+				"               lower($$) = $$),",
+				"          each(object,match(1==1),",
 				"               lower($$) = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> mapJSONHierarchySubcolumns",
-				"mapJSONHierarchySubcolumns select(mapColumn(",
+				"derivedColumn1 select(mapColumn(",
 				"          object_created_at,",
 				"          object_delete_requested_at,",
 				"          object_deleted_at,",
@@ -145,6 +150,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"mapJSONHierarchySubcolumns derive(each(nice, match(true())),",
+				"          {$$} = $$) ~> derivedColumn1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'delimited',",
