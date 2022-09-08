@@ -52,6 +52,7 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\"',",
 				"     quoteChar: '\\\"',",
+				"     nullValue: '-',",
 				"     columnNamesAsHeader: true) ~> todayCleansedData",
 				"todayCleansedData select(skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",

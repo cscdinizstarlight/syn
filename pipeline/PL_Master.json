@@ -108,7 +108,7 @@
 				}
 			},
 			{
-				"name": "Data flow1",
+				"name": "DF_Cleanse",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -148,6 +148,51 @@
 								},
 								"FileName": {
 									"value": "@concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.json')",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DF_Curate",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "DF_Cleanse",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_Curate_Incremental_FirstLoad",
+						"type": "DataFlowReference",
+						"parameters": {
+							"DFParamPLTriggerTime": "toTimestamp('1999-01-01 00:00:01')",
+							"SinkFolder": "'Rosterfy/Event/2022/09/08'",
+							"FileName": "'part-00000-066421f7-032a-4fdc-b79c-8b505ad6b23f-c000.csv'",
+							"SynapseExternalTable": "'rfy.vwRosterfyEvent'"
+						},
+						"datasetParameters": {
+							"sinkIncrementalData": {
+								"SinkFolder": {
+									"value": "@concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))",
 									"type": "Expression"
 								}
 							}
