@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": {
-					"value": "@dataset().Folder",
+					"value": "@dataset().FolderName",
 					"type": "Expression"
 				},
 				"fileSystem": "curated"
