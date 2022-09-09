@@ -64,9 +64,9 @@
 			"scriptLines": [
 				"parameters{",
 				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01')),",
-				"     SinkFolder as string ('Rosterfy/Event/2022/09/08'),",
-				"     FileName as string ('part-00000-066421f7-032a-4fdc-b79c-8b505ad6b23f-c000.csv'),",
-				"     SynapseExternalTable as string ('rfy.extRosterfyEvent')",
+				"     SinkFolder as string ('Rosterfy/Event/2022/09/09'),",
+				"     FileName as string ('part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv'),",
+				"     SynapseExternalTable as string ('rfy.RosterfyEvent')",
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
