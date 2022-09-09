@@ -50,6 +50,7 @@
 				"     quoteChar: '\\\"',",
 				"     nullValue: '-',",
 				"     columnNamesAsHeader: true,",
+				"     multiLineRow: true,",
 				"     wildcardPaths:[($SinkFolder)]) ~> todayCleansedData",
 				"todayCleansedData select(skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",
