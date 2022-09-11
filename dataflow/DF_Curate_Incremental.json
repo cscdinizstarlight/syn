@@ -1,5 +1,5 @@
 {
-	"name": "DF_Curate_Incremental_copy",
+	"name": "DF_Curate_Incremental",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
