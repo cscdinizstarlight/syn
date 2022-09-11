@@ -197,7 +197,10 @@
 								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))}'",
 								"type": "Expression"
 							},
-							"CurrentFileName": "'part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv'"
+							"CurrentFileName": {
+								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.csv')}'",
+								"type": "Expression"
+							}
 						}
 					},
 					"compute": {
