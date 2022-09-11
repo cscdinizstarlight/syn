@@ -19,11 +19,11 @@
 					"name": "allRosterfyUser"
 				},
 				{
-					"dataset": {
-						"referenceName": "DS_LogicalDW",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
-					"name": "getMaxSurrKey"
+					"name": "getAllRecords"
 				}
 			],
 			"sinks": [
@@ -59,11 +59,19 @@
 				},
 				{
 					"name": "addDateColumn"
+				},
+				{
+					"name": "MaxSurrogateKey"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
 				"parameters{",
-				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01'))",
+				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01')),",
+				"     SinkFolder as string,",
+				"     SurrogateColumn as string ('SurrogateKey')",
 				"}",
 				"source(output(",
 				"          object_id as string,",
@@ -163,14 +171,12 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     query: 'SELECT isCurrent, id, rowHash \\nFROM (\\nSELECT \\nRANK() OVER (PARTITION by id ORDER BY InsertedOn DESC) as isCurrent \\n,id\\n,rowHash\\nFROM LDW.vwRosterfyUser\\n) as t\\nwhere isCurrent = 1',",
 				"     format: 'query') ~> allRosterfyUser",
-				"source(output(",
-				"          maxSurrogateKey as long",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'SELECT max(SurrogateKey) AS maxSurrogateKey FROM LDW.vwRosterfyUser',",
-				"     format: 'query') ~> getMaxSurrKey",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet',",
+				"     fileSystem: 'curated',",
+				"     wildcardPaths:[(concat($SinkFolder, \"/*/*/*/*.parquet\"))]) ~> getAllRecords",
 				"todayCleansedData select(mapColumn(",
 				"          id = object_id,",
 				"          email = object_email,",
@@ -231,6 +237,13 @@
 				"     broadcast: 'auto')~> chkNewRows",
 				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
 				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
+				"select1 aggregate(each(match(true()), $$ = max($$))) ~> MaxSurrogateKey",
+				"getAllRecords select(mapColumn(",
+				"          each(match(locate('surrogatekey', lower(name))==1),",
+				"               'SurrogateKey' = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -239,7 +252,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData",
-				"getMaxSurrKey sink(allowSchemaDrift: true,",
+				"MaxSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
