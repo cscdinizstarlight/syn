@@ -40,9 +40,6 @@
 			],
 			"transformations": [
 				{
-					"name": "selectCuratedColumns"
-				},
-				{
 					"name": "addRowHash"
 				},
 				{
@@ -68,6 +65,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -88,7 +88,8 @@
 				"     columnDelimiter: ',',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: false) ~> todayCleansedData",
+				"     columnNamesAsHeader: false,",
+				"     multiLineRow: true) ~> todayCleansedData",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
@@ -101,9 +102,7 @@
 				"     format: 'parquet',",
 				"     fileSystem: 'curated',",
 				"     wildcardPaths:[(concat($SinkFolder, \"/*/*/*/*.parquet\"))]) ~> getAllRecords",
-				"todayCleansedData select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",
-				"selectCuratedColumns derive(rowHash = sha2(256, columns())) ~> addRowHash",
+				"todayCleansedData derive(rowHash = sha2(256, columns())) ~> addRowHash",
 				"addDateColumn keyGenerate(output(SurrogateKey as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> AddSurrogateKey",
@@ -112,7 +111,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> keepRowHash",
-				"addRowHash, keepRowHash exists(addRowHash@rowHash==keepRowHash@rowHash,",
+				"select3, keepRowHash exists(rowHash == rowHash,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> chkNewRows",
 				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
@@ -130,6 +129,11 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"addRowHash select(mapColumn(",
+				"          rowHash",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
