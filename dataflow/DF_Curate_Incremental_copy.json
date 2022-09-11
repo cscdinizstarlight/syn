@@ -65,6 +65,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -166,7 +169,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet',",
 				"     fileSystem: 'curated',",
-				"     wildcardPaths:['concat($SinkFolder, \"/*/*/*/*.parquet\")']) ~> allRosterfyUser",
+				"     wildcardPaths:[(concat($SinkFolder, \"/*/*/*/*.parquet\"))]) ~> allRosterfyUser",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
@@ -223,8 +226,8 @@
 				"addDateColumn keyGenerate(output(SurrogateKey as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> AddSurrogateKey",
-				"allRosterfyUser select(mapColumn(",
-				"          rowHash",
+				"select2 select(mapColumn(",
+				"          each(match(true()))",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> keepRowHash",
@@ -240,6 +243,12 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"allRosterfyUser select(mapColumn(",
+				"          each(match(locate('rowhash', lower(name))==1),",
+				"               'rowHash' = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
