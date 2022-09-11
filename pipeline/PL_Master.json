@@ -181,20 +181,23 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DF_Curate_Incremental_FirstLoad",
+						"referenceName": "DF_Curate_Incremental",
 						"type": "DataFlowReference",
 						"parameters": {
-							"DFParamPLTriggerTime": "toTimestamp('1999-01-01 00:00:01')",
-							"SinkFolder": "'Rosterfy/Event/2022/09/08'"
-						},
-						"datasetParameters": {
-							"sinkIncrementalData": {
-								"SinkFolder": {
-									"value": "@concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))",
-									"type": "Expression"
-								},
-								"FileName": "a"
-							}
+							"DFParamPLTriggerTime": {
+								"value": "@pipeline().TriggerTime",
+								"type": "Expression"
+							},
+							"SinkFolder": {
+								"value": "'@{activity('Get Pipeline Paramenter').output.firstRow.SinkFolder}'",
+								"type": "Expression"
+							},
+							"SurrogateColumn": "'SurrogateKey'",
+							"CurrentSinkFolder": {
+								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))}'",
+								"type": "Expression"
+							},
+							"CurrentFileName": "'part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv'"
 						}
 					},
 					"compute": {
