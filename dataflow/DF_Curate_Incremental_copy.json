@@ -12,9 +12,9 @@
 					"name": "todayCleansedData"
 				},
 				{
-					"dataset": {
-						"referenceName": "DS_LogicalDW",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
 					"name": "allRosterfyUser"
 				},
@@ -161,16 +161,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> todayCleansedData",
-				"source(output(",
-				"          isCurrent as long,",
-				"          id as string,",
-				"          rowHash as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'SELECT isCurrent, id, rowHash \\nFROM (\\nSELECT \\nRANK() OVER (PARTITION by id ORDER BY InsertedOn DESC) as isCurrent \\n,id\\n,rowHash\\nFROM LDW.vwRosterfyUser\\n) as t\\nwhere isCurrent = 1',",
-				"     format: 'query') ~> allRosterfyUser",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet',",
+				"     fileSystem: 'curated',",
+				"     wildcardPaths:['concat($SinkFolder, \"/*/*/*/*.parquet\")']) ~> allRosterfyUser",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
