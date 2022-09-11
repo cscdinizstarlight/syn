@@ -1,0 +1,136 @@
+{
+	"name": "DF_Curate_Incremental",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
+					},
+					"name": "todayCleansedData"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_LogicalDW",
+						"type": "DatasetReference"
+					},
+					"name": "allRosterfyUser"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_LogicalDW",
+						"type": "DatasetReference"
+					},
+					"name": "getMaxSurrKey"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Curated_Rosterfy_User",
+						"type": "DatasetReference"
+					},
+					"name": "sinkIncrementalData"
+				},
+				{
+					"name": "cacheMaxSurrKey"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectCuratedColumns"
+				},
+				{
+					"name": "addRowHash"
+				},
+				{
+					"name": "AddSurrogateKey"
+				},
+				{
+					"name": "keepRowHash"
+				},
+				{
+					"name": "chkNewRows"
+				},
+				{
+					"name": "seedSurrogateKey"
+				},
+				{
+					"name": "addDateColumn"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     DFParamPLTriggerTime as timestamp (currentTimestamp()),",
+				"     SinkFolder as string ('Rosterfy/Event/2022/09/09'),",
+				"     FileName as string ('part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv'),",
+				"     SynapseExternalTable as string ('rfy.RosterfyEvent')",
+				"}",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'cleansed',",
+				"     folderPath: ($SinkFolder),",
+				"     fileName: ($FileName),",
+				"     columnDelimiter: ',',",
+				"     escapeChar: '\\\"',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true,",
+				"     multiLineRow: true) ~> todayCleansedData",
+				"source(output(",
+				"          isCurrent as long,",
+				"          id as string,",
+				"          rowHash as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: (concat('SELECT isCurrent, id, rowHash FROM (SELECT RANK() OVER (PARTITION by id ORDER BY InsertedOn DESC) as isCurrent ,id, rowHash FROM ', $SynapseExternalTable ,') as t where isCurrent = 1')),",
+				"     format: 'query') ~> allRosterfyUser",
+				"source(output(",
+				"          maxSurrogateKey as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: (concat('SELECT max(SurrogateKey) AS maxSurrogateKey FROM ', $SynapseExternalTable)),",
+				"     format: 'query') ~> getMaxSurrKey",
+				"todayCleansedData select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",
+				"selectCuratedColumns derive(rowHash = sha2(256, columns())) ~> addRowHash",
+				"addDateColumn keyGenerate(output(SurrogateKey as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> AddSurrogateKey",
+				"allRosterfyUser select(mapColumn(",
+				"          rowHash",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> keepRowHash",
+				"addRowHash, keepRowHash exists(addRowHash@rowHash==keepRowHash@rowHash,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> chkNewRows",
+				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
+				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
+				"seedSurrogateKey sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData",
+				"getMaxSurrKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> cacheMaxSurrKey"
+			]
+		}
+	}
+}

@@ -1,5 +1,5 @@
 {
-	"name": "DF_Curate_Incremental",
+	"name": "DF_Curate_Incremental_copy",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -12,18 +12,18 @@
 					"name": "todayCleansedData"
 				},
 				{
-					"dataset": {
-						"referenceName": "DS_LogicalDW",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
 					"name": "allRosterfyUser"
 				},
 				{
-					"dataset": {
-						"referenceName": "DS_LogicalDW",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
-					"name": "getMaxSurrKey"
+					"name": "getAllRecords"
 				}
 			],
 			"sinks": [
@@ -39,9 +39,6 @@
 				}
 			],
 			"transformations": [
-				{
-					"name": "selectCuratedColumns"
-				},
 				{
 					"name": "addRowHash"
 				},
@@ -59,61 +56,77 @@
 				},
 				{
 					"name": "addDateColumn"
+				},
+				{
+					"name": "MaxSurrogateKey"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
 				"parameters{",
-				"     DFParamPLTriggerTime as timestamp (currentTimestamp()),",
-				"     SinkFolder as string ('Rosterfy/Event/2022/09/09'),",
-				"     FileName as string ('part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv'),",
-				"     SynapseExternalTable as string ('rfy.RosterfyEvent')",
+				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01')),",
+				"     SinkFolder as string ('Rosterfy/Event'),",
+				"     SurrogateColumn as string ('SurrogateKey'),",
+				"     CurrentSinkFolder as string ('Rosterfy/Event/2022/09/09'),",
+				"     CurrentFileName as string ('part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv')",
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'delimited',",
 				"     fileSystem: 'cleansed',",
-				"     folderPath: ($SinkFolder),",
-				"     fileName: ($FileName),",
+				"     folderPath: ($CurrentSinkFolder),",
+				"     fileName: ($CurrentFileName),",
 				"     columnDelimiter: ',',",
-				"     escapeChar: '\\\"',",
+				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true,",
 				"     multiLineRow: true) ~> todayCleansedData",
-				"source(output(",
-				"          isCurrent as long,",
-				"          id as string,",
-				"          rowHash as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: (concat('SELECT isCurrent, id, rowHash FROM (SELECT RANK() OVER (PARTITION by id ORDER BY InsertedOn DESC) as isCurrent ,id, rowHash FROM ', $SynapseExternalTable ,') as t where isCurrent = 1')),",
-				"     format: 'query') ~> allRosterfyUser",
-				"source(output(",
-				"          maxSurrogateKey as long",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet',",
+				"     fileSystem: 'curated',",
+				"     wildcardPaths:[(concat($SinkFolder, \"/*/*/*/*.parquet\"))]) ~> allRosterfyUser",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: (concat('SELECT max(SurrogateKey) AS maxSurrogateKey FROM ', $SynapseExternalTable)),",
-				"     format: 'query') ~> getMaxSurrKey",
-				"todayCleansedData select(skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> selectCuratedColumns",
-				"selectCuratedColumns derive(rowHash = sha2(256, columns())) ~> addRowHash",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet',",
+				"     fileSystem: 'curated',",
+				"     wildcardPaths:[(concat($SinkFolder, \"/*/*/*/*.parquet\"))]) ~> getAllRecords",
+				"todayCleansedData derive(rowHash = sha2(256, columns())) ~> addRowHash",
 				"addDateColumn keyGenerate(output(SurrogateKey as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> AddSurrogateKey",
-				"allRosterfyUser select(mapColumn(",
-				"          rowHash",
+				"select2 select(mapColumn(",
+				"          each(match(true()),",
+				"               'rowHash' = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> keepRowHash",
-				"addRowHash, keepRowHash exists(addRowHash@rowHash==keepRowHash@rowHash,",
+				"addRowHash, keepRowHash exists(addRowHash@rowHash == keepRowHash@rowHash,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> chkNewRows",
-				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].maxSurrogateKey) ~> seedSurrogateKey",
+				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].SurrogateKey) ~> seedSurrogateKey",
 				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
+				"select1 aggregate(each(match(true()), $$ = max($$))) ~> MaxSurrogateKey",
+				"getAllRecords select(mapColumn(",
+				"          each(match(locate('surrogatekey',lower(name))==1),",
+				"               'SurrogateKey' = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"allRosterfyUser select(mapColumn(",
+				"          each(match(locate('rowhash',lower(name))==1),",
+				"               'rowHash' = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -122,7 +135,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData",
-				"getMaxSurrKey sink(allowSchemaDrift: true,",
+				"MaxSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
