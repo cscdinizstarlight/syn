@@ -15,7 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "Rosterfy/Event",
+				"folderPath": {
+					"value": "@dataset().FolderName",
+					"type": "Expression"
+				},
 				"fileSystem": "curated"
 			},
 			"compressionCodec": "snappy"
