@@ -109,7 +109,7 @@
 				"     negate:true,",
 				"     broadcast: 'auto')~> chkNewRows",
 				"AddSurrogateKey derive(SurrogateKey = cacheMaxSurrKey#outputs()[1].SurrogateKey + SurrogateKey) ~> seedSurrogateKey",
-				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
+				"chkNewRows derive(InsertedOn = currentTimestamp()) ~> addDateColumn",
 				"derivedColumn2 aggregate(each(match(true()), $$ = iif(isNull(max(SurrogateKey)) , 0,max(SurrogateKey)))) ~> MaxSurrogateKey",
 				"getAllRecords select(mapColumn(",
 				"          each(match(locate('surrogatekey',lower(name))==1),",
