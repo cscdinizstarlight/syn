@@ -71,7 +71,6 @@
 				"parameters{",
 				"     DFParamPLTriggerTime as timestamp (toTimestamp('1999-01-01 00:00:01')),",
 				"     SinkFolder as string ('Rosterfy/Event'),",
-				"     SurrogateColumn as string ('SurrogateKey'),",
 				"     CurrentSinkFolder as string ('Rosterfy/Event/2022/09/09'),",
 				"     CurrentFileName as string ('part-00000-5c4afb30-fcac-428a-b027-6b12b459b737-c000.csv')",
 				"}",
