@@ -192,7 +192,6 @@
 								"value": "'@{activity('Get Pipeline Paramenter').output.firstRow.SinkFolder}'",
 								"type": "Expression"
 							},
-							"SurrogateColumn": "'SurrogateKey'",
 							"CurrentSinkFolder": {
 								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.SinkFolder, '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'yyyy'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'MM'), '/', formatDateTime(convertTimeZone(utcNow(), 'UTC' ,'AUS Eastern Standard Time'),'dd'))}'",
 								"type": "Expression"
