@@ -188,10 +188,6 @@
 						"referenceName": "DF_Curate_Incremental",
 						"type": "DataFlowReference",
 						"parameters": {
-							"DFParamPLTriggerTime": {
-								"value": "@pipeline().TriggerTime",
-								"type": "Expression"
-							},
 							"SinkFolder": {
 								"value": "'@{activity('Get Pipeline Paramenter').output.firstRow.SinkFolder}'",
 								"type": "Expression"
