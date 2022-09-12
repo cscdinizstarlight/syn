@@ -108,7 +108,7 @@
 				"addRowHash, keepRowHash exists(addRowHash@rowHash == keepRowHash@rowHash,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> chkNewRows",
-				"AddSurrogateKey derive(SurrogateKey = SurrogateKey + cacheMaxSurrKey#outputs()[1].SurrogateKey) ~> seedSurrogateKey",
+				"AddSurrogateKey derive(SurrogateKey = cacheMaxSurrKey#outputs()[1].SurrogateKey + SurrogateKey) ~> seedSurrogateKey",
 				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
 				"select1 aggregate(each(match(true()), $$ = max($$))) ~> MaxSurrogateKey",
 				"getAllRecords select(mapColumn(",
