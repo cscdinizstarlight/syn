@@ -27,7 +27,10 @@
 			],
 			"transformations": [
 				{
-					"name": "mapJSONHierarchySubcolumns"
+					"name": "flatten1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -43,13 +46,14 @@
 				"     documentForm: 'documentPerLine',",
 				"     backslashEscape: true,",
 				"     partitionBy('hash', 1)) ~> JSONRaw",
-				"JSONRaw select(mapColumn(",
-				"          each(nice,match(1==1)),",
-				"          each(object,match(1==1))",
+				"derivedColumn1 foldDown(unroll(tempArray),",
+				"     mapColumn(",
+				"          every(match(1==1))",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> mapJSONHierarchySubcolumns",
-				"mapJSONHierarchySubcolumns sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapOutputs: true) ~> flatten1",
+				"JSONRaw derive(tempArray = array(\"1\")) ~> derivedColumn1",
+				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'delimited',",
 				"     fileSystem: 'cleansed',",
