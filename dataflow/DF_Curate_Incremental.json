@@ -46,9 +46,6 @@
 					"name": "AddSurrogateKey"
 				},
 				{
-					"name": "keepRowHash"
-				},
-				{
 					"name": "chkNewRows"
 				},
 				{
@@ -65,6 +62,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "keepRowHash"
 				}
 			],
 			"scriptLines": [
@@ -102,12 +102,6 @@
 				"addDateColumn keyGenerate(output(SurrogateKey as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> AddSurrogateKey",
-				"select2 select(mapColumn(",
-				"          each(match(true()),",
-				"               'rowHash' = $$)",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> keepRowHash",
 				"addRowHash, keepRowHash exists(addRowHash@rowHash == keepRowHash@rowHash,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> chkNewRows",
@@ -126,6 +120,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 derive(rowHash = iif(isNull(toString(byName(\"rowHash\"))), '', toString(byName(\"rowHash\")))) ~> keepRowHash",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
