@@ -67,7 +67,7 @@
 					"name": "keepRowHash"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -110,7 +110,7 @@
 				"     broadcast: 'auto')~> chkNewRows",
 				"AddSurrogateKey derive(SurrogateKey = cacheMaxSurrKey#outputs()[1].SurrogateKey + SurrogateKey) ~> seedSurrogateKey",
 				"chkNewRows derive(InsertedOn = $DFParamPLTriggerTime) ~> addDateColumn",
-				"select1 aggregate(each(match(true()), $$ = max($$))) ~> MaxSurrogateKey",
+				"derivedColumn2 aggregate(each(match(true()), $$ = iif(isNull(max(SurrogateKey)) , 0,max(SurrogateKey)))) ~> MaxSurrogateKey",
 				"getAllRecords select(mapColumn(",
 				"          each(match(locate('surrogatekey',lower(name))==1),",
 				"               'SurrogateKey' = $$)",
@@ -124,7 +124,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
 				"select2 derive(rowHash = iif(isNull(toString(byName(\"rowHash\"))), ' ', toString(byName(\"rowHash\")))) ~> keepRowHash",
-				"MaxSurrogateKey derive(SurrogateKey = iif(isNull(toString(byName(\"SurrogateKey\"))), 0, toInteger(byName(\"SurrogateKey\")))) ~> derivedColumn1",
+				"select1 derive(SurrogateKey = iif(isNull(toString(byName(\"SurrogateKey\"))), 0, toInteger(byName(\"SurrogateKey\")))) ~> derivedColumn2",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -133,7 +133,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"MaxSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
