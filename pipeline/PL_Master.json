@@ -138,6 +138,10 @@
 							"FileName": {
 								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.json')}'",
 								"type": "Expression"
+							},
+							"SinkFileName": {
+								"value": "'@{concat(activity('Get Pipeline Paramenter').output.firstRow.EntityName, '_',variables('PipelineId'),'.csv')}'",
+								"type": "Expression"
 							}
 						},
 						"datasetParameters": {
