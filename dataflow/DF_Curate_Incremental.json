@@ -28,9 +28,9 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "DS_Curated_Rosterfy_User",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "datalake",
+						"type": "LinkedServiceReference"
 					},
 					"name": "sinkIncrementalData"
 				},
@@ -128,6 +128,8 @@
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
+				"     fileSystem: 'curated',",
+				"     folderPath: ($CurrentSinkFolder),",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
