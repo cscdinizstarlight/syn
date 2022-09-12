@@ -65,6 +65,9 @@
 				},
 				{
 					"name": "keepRowHash"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -121,6 +124,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
 				"select2 derive(rowHash = iif(isNull(toString(byName(\"rowHash\"))), ' ', toString(byName(\"rowHash\")))) ~> keepRowHash",
+				"MaxSurrogateKey derive(SurrogateKey = iif(isNull(toString(byName(\"SurrogateKey\"))), 0, toInteger(byName(\"SurrogateKey\")))) ~> derivedColumn1",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
@@ -129,7 +133,7 @@
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sinkIncrementalData",
-				"MaxSurrogateKey sink(allowSchemaDrift: true,",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
