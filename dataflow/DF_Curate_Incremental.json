@@ -120,7 +120,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 derive(rowHash = iif(isNull(toString(byName(\"rowHash\"))), '', toString(byName(\"rowHash\")))) ~> keepRowHash",
+				"select2 derive(rowHash = iif(isNull(toString(byName(\"rowHash\"))), ' ', toString(byName(\"rowHash\")))) ~> keepRowHash",
 				"seedSurrogateKey sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'parquet',",
