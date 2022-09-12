@@ -33,7 +33,8 @@
 			"scriptLines": [
 				"parameters{",
 				"     SinkFolder as string,",
-				"     FileName as string",
+				"     FileName as string,",
+				"     SinkFileName as string",
 				"}",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -56,7 +57,7 @@
 				"     quoteChar: '\\\"',",
 				"     nullValue: '-',",
 				"     columnNamesAsHeader: true,",
-				"     partitionFileNames:[''],",
+				"     partitionFileNames:[($SinkFileName)],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
